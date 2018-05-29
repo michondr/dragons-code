@@ -1,5 +1,6 @@
 package item;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -13,6 +14,7 @@ public class Creature extends Item implements IPrintable {
 
     public Creature(String name){
         super(name);
+        lootSet = new HashSet<>();
         this.friendly = false;
         this.player = false;
     }
@@ -21,8 +23,8 @@ public class Creature extends Item implements IPrintable {
         return lootSet;
     }
 
-    public void setLootSet(Set<Loot> lootSet) {
-        this.lootSet = lootSet;
+    public void addLoot(Loot loot) {
+        this.lootSet.add(loot);
     }
 
     public boolean isFriendly() {

@@ -18,8 +18,21 @@ public class GameTexts {
         System.out.println("You cant go any further in this direction");
     }
 
+    public static void printCollectErrorNoItem(){
+        System.out.println("No loot item here");
+    }
+
+    public static void printCollectErrorNotPortable(){
+        System.out.println("This item is too heavy to lift");
+    }
+
     public static String getWanderText(){
         String[] wordlist = {
+                "",
+                "",
+                "",
+                "",
+                "",
                 "",
                 "",
                 "",
@@ -29,4 +42,9 @@ public class GameTexts {
         };
         return wordlist[new Random().nextInt(wordlist.length)];
     }
+
+    public static void printHelpText(){
+        System.out.println("this is a help text. no clue what to write here. just wander around, get loot and kill some dragons!");
+    }
+
 }

@@ -4,6 +4,7 @@ import command.ICommand;
 import item.Creature;
 import item.Item;
 import item.Loot;
+import item.Place;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
@@ -17,6 +18,7 @@ public class Game extends JFrame {
 
     private Creature player;
     private LocationPlan currentLocation;
+    private LocationPlan baseLocation;
     private Set<ICommand> commands;
 
     public void setCommands(Set<ICommand> commands) {
@@ -28,7 +30,11 @@ public class Game extends JFrame {
         player = new Creature("hero michondr");
         player.setPlayer(true);
         player.setLocation(new Location(0,0));
-        LocationPlan baseLocation = new LocationPlan(30, 10);
+        Loot oneGold = new Loot("gold");
+        oneGold.setDescription("previously owned by king Arthur");
+        player.addLoot(oneGold);
+
+        baseLocation = new LocationPlan(30, 10);
 
         Creature zombie = new Creature("zombie");
         zombie.setLocation(new Location(0, 1));
@@ -38,10 +44,29 @@ public class Game extends JFrame {
         baseLocation.addItem(zombie2);
 
         Loot bagOfMoney = new Loot("moneyyy");
+        bagOfMoney.setWeight(10);
         baseLocation.addItem(bagOfMoney);
 
-        baseLocation.printPlan(this);
+        LocationPlan churchPlan = new LocationPlan(10, 4);
+        Loot table = new Loot("table");
+        table.setPortable(false);
+        table.setDescription("Aither, the antient one, was killed here by King the David");
+        churchPlan.addItem(table);
+
+        Loot dragonscale = new Loot("dragonscale");
+        dragonscale.setWeight(8);
+        dragonscale.setDescription("Kind the David used this sword to kill Aither");
+        churchPlan.addItem(dragonscale);
+
+        Place church = new Place("church", churchPlan);
+        baseLocation.addItem(church);
+
+
+
+
         currentLocation = baseLocation;
+        currentLocation.printPlan(this);
+
 
         handleKeyPresses();
     }
@@ -78,11 +103,25 @@ public class Game extends JFrame {
         return commands.stream().filter(x -> x.getKey() == key).findFirst().orElse(null);
     }
 
+    public Set<ICommand> getCommands(){
+        return commands;
+    }
+
     public Creature getPlayer() {
         return player;
     }
 
     public LocationPlan getCurrentPlan() {
         return currentLocation;
+    }
+
+    public LocationPlan getBaseLocation(){
+        return baseLocation;
+    }
+
+    public void setCurrentPlan(LocationPlan plan){
+        currentLocation = plan;
+        player.setLocation(new Location(0, 0));
+        currentLocation.printPlan(this);
     }
 }

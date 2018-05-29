@@ -1,12 +1,14 @@
 package game;
 
+import command.ICommand;
 import item.Creature;
 import item.Item;
+import item.Loot;
 
 /**
  * @author Ondřej Michálek me@michondr.cz || mico00@vse.cz
  */
-class LocationPrinter {
+public class LocationPrinter {
 
     static void printPlan(LocationPlan plan, Game game) {
         Location endpoint = plan.getPlanSizeEndpoint();
@@ -18,7 +20,7 @@ class LocationPrinter {
             for (int x = 0; x < endpoint.getX(); x++) {
                 Location curLoc = new Location(x, y);
 
-                if(player.getLocation().equals(curLoc)){
+                if (player.getLocation().equals(curLoc)) {
                     System.out.print(player.getSymbol());
                     continue;
                 }
@@ -45,4 +47,46 @@ class LocationPrinter {
         }
         System.out.println();
     }
+
+    private static void printSeparator() {
+        System.out.println("_________________________________________");
+    }
+
+    public static void printInventory(Creature creature) {
+        printSeparator();
+        System.out.println("name\tweight\tdescription");
+
+        for (Loot item : creature.getLootSet()) {
+            System.out.println(
+                    item.getName() + "\t"
+                            + item.getWeight() + "\t"
+                            + item.getDescription()
+            );
+        }
+    }
+
+    public static void printInventory(Loot loot) {
+        printSeparator();
+        System.out.println("name\tweight\tdescription");
+
+        System.out.println(
+                loot.getName() + "\t"
+                + loot.getWeight() + "\t"
+                + loot.getDescription()
+        );
+    }
+
+    public static void printHelp(Game game) {
+        printSeparator();
+        GameTexts.printHelpText();
+        System.out.println("key\tdescription");
+
+        for (ICommand command : game.getCommands()) {
+            System.out.println(
+                    command.getKey() + "\t"
+                            + command.getDescription()
+            );
+        }
+    }
+
 }
