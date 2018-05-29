@@ -12,6 +12,7 @@ public class Item implements IPrintable {
     private Location location;
 
     public Item(String name) {
+        description = "";
         this.name = name;
     }
 
@@ -41,7 +42,12 @@ public class Item implements IPrintable {
 
     @Override
     public String toString() {
-        return super.getClass() + " name: " + name + "(x: " + location.getX() + " y: " + location.getY() + ")\n";
+        String delimitered = "";
+
+        if(!description.equals("")){
+            delimitered = " - " + description;
+        }
+        return super.getClass().getSimpleName() + " " + name + delimitered + "\n";
     }
 
     @Override

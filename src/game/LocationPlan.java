@@ -46,15 +46,15 @@ public class LocationPlan {
         return endpoint;
     }
 
-    public Set getPlaces() {
+    public Set<Place> getPlaces() {
         return places;
     }
 
-    public Set getLoot() {
+    public Set<Loot> getLoot() {
         return loot;
     }
 
-    public Set getCreatures() {
+    public Set<Creature> getCreatures() {
         return creatures;
     }
 

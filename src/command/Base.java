@@ -22,4 +22,9 @@ public class Base implements ICommand {
     public void init(Game game) {
         game.setCurrentPlan(game.getBaseLocation());
     }
+
+    @Override
+    public boolean isMove() {
+        return false;
+    }
 }

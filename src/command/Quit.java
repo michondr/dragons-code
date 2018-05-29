@@ -23,4 +23,9 @@ public class Quit implements ICommand {
         GameTexts.printGoodbye();
         System.exit(0);
     }
+
+    @Override
+    public boolean isMove() {
+        return false;
+    }
 }

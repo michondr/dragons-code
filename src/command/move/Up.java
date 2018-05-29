@@ -30,6 +30,11 @@ public class Up implements ICommand {
         }
     }
 
+    @Override
+    public boolean isMove() {
+        return true;
+    }
+
     private boolean canMove(Game game) {
         int playerY = game.getPlayer().getLocation().getY();
 

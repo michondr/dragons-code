@@ -23,4 +23,9 @@ public class Inventory implements ICommand {
     public void init(Game game) {
         LocationPrinter.printInventory(game.getPlayer());
     }
+
+    @Override
+    public boolean isMove() {
+        return false;
+    }
 }

@@ -54,11 +54,12 @@ public class LocationPrinter {
 
     public static void printInventory(Creature creature) {
         printSeparator();
-        System.out.println("name\tweight\tdescription");
+        System.out.println("name\tquantity\tweight\tdescription");
 
         for (Loot item : creature.getLootSet()) {
             System.out.println(
                     item.getName() + "\t"
+                            + item.getQuantity() + "\t"
                             + item.getWeight() + "\t"
                             + item.getDescription()
             );

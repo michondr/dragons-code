@@ -12,4 +12,6 @@ public interface ICommand {
     public String getDescription();
 
     public void init(Game game);
+
+    public boolean isMove();
 }

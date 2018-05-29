@@ -2,6 +2,7 @@ package command;
 
 import game.Game;
 import game.GameTexts;
+import game.Location;
 import game.LocationPrinter;
 
 /**
@@ -22,5 +23,11 @@ public class Help implements ICommand {
     @Override
     public void init(Game game) {
         LocationPrinter.printHelp(game);
+        GameTexts.printHP(game.getPlayer());
+    }
+
+    @Override
+    public boolean isMove() {
+        return false;
     }
 }

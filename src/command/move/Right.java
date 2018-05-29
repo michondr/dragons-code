@@ -30,6 +30,11 @@ public class Right implements ICommand {
         }
     }
 
+    @Override
+    public boolean isMove() {
+        return true;
+    }
+
     private boolean canMove(Game game) {
         int playerX = game.getPlayer().getLocation().getX();
         int gameX = game.getCurrentPlan().getPlanSizeEndpoint().getX();

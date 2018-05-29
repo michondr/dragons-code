@@ -36,6 +36,7 @@ public class Collect implements ICommand {
                 GameTexts.printCollectErrorNotPortable();
                 return;
             }
+
             game.getPlayer().addLoot(item);
             game.getCurrentPlan().getLoot().remove(item);
 
@@ -43,5 +44,10 @@ public class Collect implements ICommand {
         } else {
             GameTexts.printCollectErrorNoItem();
         }
+    }
+
+    @Override
+    public boolean isMove() {
+        return false;
     }
 }

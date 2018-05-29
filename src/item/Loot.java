@@ -5,15 +5,18 @@ package item;
  */
 public class Loot extends Item implements IPrintable {
 
-    private int weight = 1;
+    private int weight;
+    private int quantity;
     private boolean portable = true;
 
     public Loot(String name) {
         super(name);
+        weight = 1;
+        quantity = 1;
     }
 
     public int getWeight() {
-        return weight;
+        return weight * quantity;
     }
 
     public void setWeight(int weight) {
@@ -26,6 +29,14 @@ public class Loot extends Item implements IPrintable {
 
     public void setPortable(boolean portable) {
         this.portable = portable;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     @Override

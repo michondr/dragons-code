@@ -36,4 +36,9 @@ public class Go implements ICommand {
             GameTexts.printCollectErrorNoItem();
         }
     }
+
+    @Override
+    public boolean isMove() {
+        return false;
+    }
 }
