@@ -71,22 +71,22 @@ public class LocationPlan {
             item.setLocation(newLoc);
         }
 
-        if(item.getClass() == Creature.class){
+        if (item.getClass() == Creature.class) {
             creatures.add((Creature) item);
             return;
         }
 
-        if(item.getClass() == Dragon.class){
+        if (item.getClass() == Dragon.class) {
             dragons.add((Dragon) item);
             return;
         }
 
-        if(item.getClass() == Loot.class){
+        if (item.getClass() == Loot.class) {
             loot.add((Loot) item);
             return;
         }
 
-        if(item.getClass() == Door.class){
+        if (item.getClass() == Door.class) {
             doors.add((Door) item);
         }
     }

@@ -104,7 +104,11 @@ public class GameTexts {
     }
 
     public static void printHelpText() {
-        System.out.println(RESET + "this is a help text. no clue what to write here. just wander around, get loot and kill some dragons!");
+        System.out.println(
+                RESET + "This screen is your help screen. You can invoke it any time by pressing \"h\"." +
+                        "\nPoint of this game is to have some fun and kill some monsters and dragons in the meantime. " +
+                        "\nYou, Dovahkiin, can win this game by killing Alduin, the World Eater " +
+                        "\nLevel up and kill the beast!");
     }
 
     public static void printHP(Creature creature) {

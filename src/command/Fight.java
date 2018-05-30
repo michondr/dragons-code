@@ -22,6 +22,10 @@ public class Fight implements ICommand {
         return "fight - hit creature so much it begs you for mercy and then dies";
     }
 
+    /**
+     * heal player when he kills monster which possesses loot
+     * check if player killed Alduin, where the game ends,
+     */
     @Override
     public void init(Game game) {
         Item itemOnLocation = game.getCurrentPlan().getItemByLocation(game.getPlayer().getLocation());
@@ -47,8 +51,21 @@ public class Fight implements ICommand {
             }
             if (creature.getHp() <= 0) {
                 GameTexts.printDead(creature);
-                game.getCurrentPlan().getCreatures().remove(creature);
+
+                if(itemOnLocation.getClass() == Creature.class){
+                    game.getCurrentPlan().getCreatures().remove(creature);
+                }
+                if(itemOnLocation.getClass() == Dragon.class){
+                    game.getCurrentPlan().getDragons().remove((Dragon) creature);
+                }
                 player.addLoot(creature.getLootSet());
+
+                if(creature.getLootSet().size() > 0){
+                    player.setHp(player.getHpInitial());
+                    for (Creature creatureInPlan : game.getCurrentPlan().getCreatures()) {
+                        creatureInPlan.setHp(creatureInPlan.getHpInitial());
+                    }
+                }
             }
 
             GameTexts.printHP(player);

@@ -50,36 +50,35 @@ public class LocationPrinter {
         for (int x = 0; x < size + 2; x++) {
             System.out.print("-");
         }
-        System.out.println();
+        System.out.println(GameTexts.RESET);
     }
 
     private static void printSeparator() {
-        System.out.println("_________________________________________");
+        System.out.println(GameTexts.RESET + "_______________________________________________________________");
     }
 
     public static void printInventory(Creature creature) {
         printSeparator();
-        System.out.println("name\tquantity\tweight\tdescription");
 
+        final Object[][] table = new String[creature.getLootSet().size()+1][4];
+
+        table[0] = new String[] { "quantity", "weight", "name", "description" };
+
+        int currentIndex = 0;
         for (Loot item : creature.getLootSet()) {
-            System.out.println(
-                    item.getName() + "\t"
-                            + item.getQuantity() + "\t"
-                            + item.getWeight() + "\t"
-                            + item.getDescription()
-            );
+            currentIndex++;
+
+            table[currentIndex] = new String[] {
+                    String.valueOf(item.getQuantity()),
+                    String.valueOf(item.getWeight()),
+                    item.getName(),
+                    item.getDescription()
+            };
         }
-    }
 
-    public static void printInventory(Loot loot) {
-        printSeparator();
-        System.out.println("name\tweight\tdescription");
-
-        System.out.println(
-                loot.getName() + "\t"
-                        + loot.getWeight() + "\t"
-                        + loot.getDescription()
-        );
+        for (final Object[] row : table) {
+            System.out.format("%-10s%-10s%-40s%-15s\n", row);
+        }
     }
 
     public static void printHelp(Game game) {

@@ -25,9 +25,9 @@ public class Creature extends Item implements IPrintable {
         lootSet = new HashSet<>();
         this.friendly = false;
         this.player = false;
-        this.moving = false;
+        this.moving = true;
         this.hp = 100;
-        this.hpInitial = 100;
+        this.hpInitial = 1000;
         this.hit = 1;
     }
 

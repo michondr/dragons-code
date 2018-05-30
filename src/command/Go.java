@@ -17,7 +17,7 @@ public class Go implements ICommand {
 
     @Override
     public String getDescription() {
-        return "go to location";
+        return "go to location though door";
     }
 
     @Override

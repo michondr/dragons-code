@@ -10,6 +10,13 @@ import game.LocationPrinter;
  */
 public class Help implements ICommand {
 
+    public static void print(Game game) {
+        LocationPrinter.printHelp(game);
+        GameTexts.printHP(game.getPlayer());
+        GameTexts.printHit(game.getPlayer());
+
+    }
+
     @Override
     public char getKey() {
         return 'h';
@@ -22,9 +29,7 @@ public class Help implements ICommand {
 
     @Override
     public void init(Game game) {
-        LocationPrinter.printHelp(game);
-        GameTexts.printHP(game.getPlayer());
-        GameTexts.printHit(game.getPlayer());
+        print(game);
     }
 
     @Override

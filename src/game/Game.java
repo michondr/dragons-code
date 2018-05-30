@@ -1,5 +1,6 @@
 package game;
 
+import command.Help;
 import command.ICommand;
 import item.*;
 
@@ -61,6 +62,10 @@ public class Game extends JFrame {
                 ),
                 new Dragon("Odahviing", "As for myself, you've proven your mastery twice over. Thuri, Dovahkiin. I gladly acknowledge the power of your Thu'um", 20, 30,
                         new Loot("dragon soul", "from Odahviing", 0, 1),
+                        new Loot("gold", "", 0, 100)
+                ),
+                new Dragon("Odahviing2", "As for myself, you've proven your mastery twice over. Thuri, Dovahkiin. I gladly acknowledge the power of your Thu'um", 20, 30,
+                        new Loot("dragon soul", "from Odahviing2", 0, 1),
                         new Loot("gold", "", 0, 100)
                 ),
                 new Loot("gold", "", 0, 20),
@@ -260,7 +265,7 @@ public class Game extends JFrame {
                         new Loot("gold", "", 0, 120),
                         new Loot("dragon soul", "from Paarthurnax", 0, 1)
                 ),
-                new Dragon("Alduin", "What is better - to be born good, or to overcome your evil nature through great effort?", 750, 433,
+                new Dragon("Alduin", "And the Scrolls have foretold of black wings in the cold, That when brothers wage war come unfurled! Alduin, Bane of Kings, ancient shadow unbound, With a hunger to swallow the world!", 750, 433,
                         new Loot("gold", "", 0, 999),
                         new Loot("dragon soul", "from Alduin", 0, 1)
                 )
@@ -311,8 +316,9 @@ public class Game extends JFrame {
 
 
         // finishing touches
+        Help.print(this);
         currentLocation = helgen;
-        baseLocation = falkreath;
+        baseLocation = winterhold;
         currentLocation.printPlan(this);
         handleKeyPresses();
     }
@@ -330,6 +336,7 @@ public class Game extends JFrame {
                 } else {
                     if (command.isMove()) {
                         handleMovingCreatures();
+                        handleMovingDragons();
                     }
                     command.init(currentGame);
                     handleCurrentLocationInfo();
@@ -393,6 +400,66 @@ public class Game extends JFrame {
         }
     }
 
+    private void handleMovingDragons() {
+        for (Dragon dr : currentLocation.getDragons()) {
+            if (!dr.isMoving()) {
+                continue;
+            }
+
+            int randX = 0;
+            int randY = 0;
+
+            switch (ThreadLocalRandom.current().nextInt(12)) {
+                case 1:
+                    randX = 1;
+                    randY = 1;
+                    break;
+                case 2:
+                    randX = -1;
+                    randY = -1;
+                    break;
+                case 3:
+                    randX = -1;
+                    randY = 1;
+                    break;
+                case 4:
+                    randX = 1;
+                    randY = -1;
+                    break;
+                case 5:
+                    randX = 1;
+                    randY = 0;
+                    break;
+                case 6:
+                    randX = -1;
+                    randY = 0;
+                    break;
+                case 7:
+                    randX = 0;
+                    randY = 1;
+                    break;
+                case 8:
+                    randX = 0;
+                    randY = -1;
+                    break;
+            }
+
+            if (dr.getLocation().getX() == 0 && randX < 0) {
+                randX = 0;
+            }
+            if (dr.getLocation().getY() == 0 && randY < 0) {
+                randY = 0;
+            }
+            if (dr.getLocation().getX() == getCurrentPlan().getPlanSizeEndpoint().getX() - 1 && randX > 0) {
+                randX = 0;
+            }
+            if (dr.getLocation().getY() == getCurrentPlan().getPlanSizeEndpoint().getY() - 1 && randY > 0) {
+                randY = 0;
+            }
+            dr.editLocation(randX, randY);
+        }
+    }
+
     private ICommand getCommand(char key) {
         return commands.stream().filter(x -> x.getKey() == key).findFirst().orElse(null);
     }
@@ -416,11 +483,6 @@ public class Game extends JFrame {
     public void setCurrentPlan(LocationPlan plan) {
         currentLocation = plan;
         currentLocation.printPlan(this);
-
-        getPlayer().setHp(getPlayer().getHpInitial());
-        for (Creature creature : currentLocation.getCreatures()) {
-            creature.setHp(creature.getHpInitial());
-        }
     }
 
     public LocationPlan getBaseLocation() {

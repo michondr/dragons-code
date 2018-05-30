@@ -39,8 +39,6 @@ public class Collect implements ICommand {
 
             game.getPlayer().addLoot(item);
             game.getCurrentPlan().getLoot().remove(item);
-
-            LocationPrinter.printInventory(item);
         } else {
             GameTexts.printCollectErrorNoItem();
         }

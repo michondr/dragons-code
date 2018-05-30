@@ -4,10 +4,8 @@ import game.GameTexts;
 import org.reflections.Reflections;
 
 import javax.swing.*;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * @author Ondřej Michálek me@michondr.cz || mico00@vse.cz
