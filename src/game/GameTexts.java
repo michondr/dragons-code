@@ -104,7 +104,7 @@ public class GameTexts {
     }
 
     public static void printCreatureColoredSymbol(Creature creature, Creature player) {
-        if (creature.getHit() * 3 > player.getHp() || creature.getHp() > player.getHit() * 3) {
+        if (creature.getHp() / player.getHit() > player.getHp() / creature.getHit()) {
             System.out.print(RED + creature.getSymbol());
         } else {
             System.out.print(creature.getSymbol());

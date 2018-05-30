@@ -26,9 +26,9 @@ public class Creature extends Item implements IPrintable {
         this.friendly = false;
         this.player = false;
         this.moving = false;
-        this.hp = 0;
-        this.hpInitial = 0;
-        this.hit = 0;
+        this.hp = 100;
+        this.hpInitial = 100;
+        this.hit = 1;
     }
 
     public Creature(String name, String desription, boolean friendly, boolean moving, int hp, int hit) {
@@ -41,6 +41,19 @@ public class Creature extends Item implements IPrintable {
         this.hit = hit;
 
         lootSet = new HashSet<>();
+        this.player = false;
+    }
+
+    public Creature(String name, String desription, boolean friendly, boolean moving, int hp, int hit, Loot ... loot) {
+        super(name);
+        setDescription(desription);
+        this.friendly = friendly;
+        this.moving = moving;
+        this.hp = hp;
+        this.hpInitial = hp;
+        this.hit = hit;
+
+        lootSet = Set.of(loot);
         this.player = false;
     }
 
@@ -139,12 +152,17 @@ public class Creature extends Item implements IPrintable {
 
     @Override
     public String toString() {
-        String parent = super.toString();
+        String parent = "(" + super.getClass().getSimpleName() + ") " + getName();
+
+        if (!getDescription().equals("")) {
+            parent += " \"" + getDescription() + "\"\n";
+        }
+
         StringJoiner loot = new StringJoiner(", ");
 
         for (Loot l : getLootSet()) {
             loot.add(l.getName());
         }
-        return parent + loot + "\n";
+        return parent + "loot: " + loot + "\n";
     }
 }

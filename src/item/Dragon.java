@@ -19,6 +19,10 @@ public class Dragon extends Creature implements IPrintable {
         super(name, desription, false, true, hp, hit);
     }
 
+    public Dragon(String name, String desription, int hp, int hit, Loot ... loots) {
+        super(name, desription, false, true, hp, hit, loots);
+    }
+
     @Override
     public char getSymbol() {
         return 'W';
