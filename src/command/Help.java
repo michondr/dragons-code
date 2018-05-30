@@ -2,8 +2,6 @@ package command;
 
 import game.Game;
 import game.GameTexts;
-import game.Location;
-import game.LocationPrinter;
 
 /**
  * @author Ondřej Michálek me@michondr.cz || mico00@vse.cz
@@ -11,7 +9,7 @@ import game.LocationPrinter;
 public class Help implements ICommand {
 
     public static void print(Game game) {
-        LocationPrinter.printHelp(game);
+        GameTexts.printHelp(game);
         GameTexts.printHP(game.getPlayer());
         GameTexts.printHit(game.getPlayer());
 

@@ -5,5 +5,5 @@ package item;
  */
 public interface IPrintable {
 
-    public char getSymbol();
+    char getSymbol();
 }

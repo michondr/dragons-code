@@ -9,11 +9,6 @@ import java.util.Set;
 
 /**
  * @author Ondřej Michálek me@michondr.cz || mico00@vse.cz
- *
- * Simple java game inspired by
- * Your quest is to kill Alduin, the World Eater
- *
- *
  */
 public class Main {
 
@@ -31,6 +26,9 @@ public class Main {
         });
     }
 
+    /**
+     * dope way to get around creating another class like `commandSet` which is useless
+     */
     private static Set<ICommand> getCommands(){
         Reflections reflections = new Reflections("command");
         Set<Class<? extends ICommand>> commands = reflections.getSubTypesOf(ICommand.class);

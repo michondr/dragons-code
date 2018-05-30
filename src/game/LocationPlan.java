@@ -15,14 +15,15 @@ import java.util.stream.Collectors;
  * |   @       $       |
  * |                   |
  * |                   |
- * |                   |
+ * |             W     |
  * |      #            |
  * |            %      |
  * ---------------------
  * @ - player
  * $ - loot
  * # - location
- * % - enemies
+ * ! - enemy
+ * W - dragon
  */
 public class LocationPlan {
 
@@ -126,7 +127,7 @@ public class LocationPlan {
     }
 
     public void printPlan(Game game) {
-        LocationPrinter.printPlan(this, game);
+        GameTexts.printPlan(this, game);
     }
 
     public String getName() {

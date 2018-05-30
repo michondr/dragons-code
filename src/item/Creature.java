@@ -9,6 +9,9 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author Ondřej Michálek me@michondr.cz || mico00@vse.cz
+ *
+ * method overloading if cool and stuff, but I'm missing default arguments from php.
+ * overloading creates soo much more code
  */
 public class Creature extends Item implements IPrintable {
 

@@ -2,7 +2,6 @@ package command;
 
 import game.Game;
 import game.GameTexts;
-import game.LocationPrinter;
 import item.Item;
 import item.Loot;
 

@@ -2,7 +2,6 @@ package command;
 
 import game.Game;
 import game.GameTexts;
-import game.LocationPrinter;
 
 /**
  * @author Ondřej Michálek me@michondr.cz || mico00@vse.cz
@@ -21,7 +20,7 @@ public class Inventory implements ICommand {
 
     @Override
     public void init(Game game) {
-        LocationPrinter.printInventory(game.getPlayer());
+        GameTexts.printInventory(game.getPlayer());
     }
 
     @Override

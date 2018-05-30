@@ -4,6 +4,9 @@ import item.Loot;
 
 /**
  * @author Ondřej Michálek me@michondr.cz || mico00@vse.cz
+ *
+ * bad idea
+ * way to handle boosts of hit or hp
  */
 public class GameEquipmentResolver {
 

@@ -11,12 +11,18 @@ import java.util.stream.Collectors;
  */
 public class GameItemsFactory {
 
+    /**
+     * short way to create lots of items and add them to location
+     */
     public static void createItems(LocationPlan plan, Item... items) {
         for (Item item : items) {
             plan.addItem(item);
         }
     }
 
+    /**
+     * add all the loot to all creatures of the name in the location
+     */
     public static void addLootToCreature(LocationPlan plan, String name, Loot... loots) {
         Set<Item> itemsByName = plan.getUsedItems()
                 .stream()

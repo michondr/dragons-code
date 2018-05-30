@@ -30,6 +30,7 @@ Game plans are displayed in ASCII art-like graphics with following symbols:
 * `|` and `-` for borders
 * `@` player location (yellow)
 * `!` creature you can kill (default white, red when you're unlikely to succeed)
+* `W` dragon
 * `$` loot you can collect
 * `#` door/road to location you can go to
 

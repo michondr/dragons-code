@@ -323,6 +323,9 @@ public class Game extends JFrame {
         handleKeyPresses();
     }
 
+    /**
+     * easiest way to get simple key presses to java without confirm
+     */
     private void handleKeyPresses() {
         Game currentGame = this;
         addKeyListener(new KeyAdapter() {
@@ -357,6 +360,10 @@ public class Game extends JFrame {
         }
     }
 
+    /**
+     * move movable creature to randomly to random position or not
+     * and look after walking yout of the frame
+     */
     private void handleMovingCreatures() {
         for (Creature cr : currentLocation.getCreatures()) {
             if (!cr.isMoving()) {
@@ -401,6 +408,9 @@ public class Game extends JFrame {
         }
     }
 
+    /**
+     * same as handleMovingCreatures, but more drastic
+     */
     private void handleMovingDragons() {
         for (Dragon dr : currentLocation.getDragons()) {
             if (!dr.isMoving()) {
