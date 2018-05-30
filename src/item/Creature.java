@@ -73,9 +73,9 @@ public class Creature extends Item implements IPrintable {
         if (contains != null) {
             contains.setQuantity(contains.getQuantity() + loot.getQuantity());
         } else {
-            hit += GameEquipmentResolver.resolveHitChage(loot);
-            hpInitial += GameEquipmentResolver.resolveHPChage(loot);
-            hp += GameEquipmentResolver.resolveHPChage(loot);
+            hit += GameEquipmentResolver.resolveHitChange(loot);
+            hpInitial += GameEquipmentResolver.resolveHPChange(loot);
+            hp += GameEquipmentResolver.resolveHPChange(loot);
             this.lootSet.add(loot);
         }
     }

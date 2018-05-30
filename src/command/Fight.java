@@ -5,20 +5,21 @@ import game.GameTexts;
 import item.Creature;
 import item.Dragon;
 import item.Item;
+import item.Loot;
 
 /**
  * @author Ondřej Michálek me@michondr.cz || mico00@vse.cz
  */
-public class Kill implements ICommand {
+public class Fight implements ICommand {
 
     @Override
     public char getKey() {
-        return 'k';
+        return 'f';
     }
 
     @Override
     public String getDescription() {
-        return "kill - hit creature so much it begs you for mercy and the dies";
+        return "fight - hit creature so much it begs you for mercy and then dies";
     }
 
     @Override
@@ -35,7 +36,7 @@ public class Kill implements ICommand {
 
             creature.setHp(creature.getHp() - player.getHitRandomized());
 
-            if(!creature.isFriendly()){
+            if (!creature.isFriendly()) {
                 player.setHp(player.getHp() - creature.getHitRandomized());
             }
 
@@ -52,6 +53,18 @@ public class Kill implements ICommand {
 
             GameTexts.printHP(player);
             GameTexts.printHP(creature);
+        }
+
+        checkGameEnd(game.getPlayer());
+    }
+
+    private void checkGameEnd(Creature player) {
+        for (Loot loot : player.getLootSet()) {
+            if(loot.getName().equals("dragon soul") && loot.getDescription().equals("from Alduin")){
+                GameTexts.printEpilogue(player);
+                GameTexts.printGoodbye();
+                System.exit(0);
+            }
         }
     }
 

@@ -20,53 +20,91 @@ public class GameTexts {
     public static final String WHITE = "\u001B[37m";
 
     public static void printWelcome() {
-        System.out.println("Hello and welcome to dragons&code!");
+        System.out.println(RESET + "Hello and welcome to dragons&code!");
     }
 
     public static void printGoodbye() {
-        System.out.println("Thank you for playing this game!");
+        System.out.println(RESET + "Thank you for playing this game!");
     }
 
     public static void printMoveError() {
-        System.out.println("You cant go any further in this direction");
+        System.out.println(RESET + "You cant go any further in this direction");
     }
 
     public static void printCollectErrorNoItem() {
-        System.out.println("No loot item here");
+        System.out.println(RESET + "No loot item here");
     }
 
     public static void printCollectErrorNotPortable() {
-        System.out.println("This item is too heavy to lift");
+        System.out.println(RESET + "This item is too heavy to lift");
     }
 
-    public static String getWanderText() {
+    public static void printWanderText() {
         String[] wordlist = {
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "The journey is long, I'm missing some blood!",
-                "Holly molly coca-cola koala",
-                "You're a warrior, you deserve the best!",
+                "What do you need, handsome?",
+                "Can't wait to count out your coin.",
+                "I should bash your face in after all you've done",
+                "My father said I should go to college but he didnt say which one.",
+                "Got to start carrying a dagger in my boot. I'm tired of getting disarmed.",
+                "I'd be a lot happier and a lot warmer with a belly full of mead.",
+                "I'm not a man, I'm a weapon in human form.",
+                "Some may call this junk, me, I call them treasures",
+                "Lot of history in these walls. We're trying to make some more. It's a lucky time to be alive.",
+                "Skyrim's harshness has a way of carving a man down to his true self.",
+                "I would gladly retire from the world. Were such a day to dawn.",
+                "FUS RO DAH!",
+                "You stink of death my friend. I salute you.",
+                "Guhh...",
+                "You know what is wrong with Skyrim these days? Everyone is obsessed with death.",
+                "This is not play-acting, here. We are the true spirit of Skyrim. Honor is in our blood, death in our hearts.",
+                "Skyrim belongs to the Nords!",
+                "Vitory or sovgarde!!!",
+                "Murder, banditry, assault, theft...and lolygagging",
+                "Skyrim is now host to giant, flying lizards and two-legged cat-men, and you're surprised by me? Yes. I just talked. And am continuing to do so.",
+                "I had an uncle, you see. He made certain... unwanted advances. So I killed him. And liked it. Then I killed again. And liked it even more",
+                "Need to oil mother soon... Get all the hard to reach places...",
+                "My ancestors are smiling at me imperial, can you say the same?",
+                "What in oblivion is that!?",
+                "Keep walkin', softgut. I'm more woman than you can handle",
+                "Would you like a bow that shoots rainbows too? Or perhaps a quiver that dispenses beer?",
+                "Talos the Mighty! Talos the unerring! Talos the unassailable!",
+                "Legends don't burn down villages",
+                "I am a master wizard of the house Televanni, OTHER people make tea for me.",
+                "You are taking us somewhere warm, I trust?",
+                "You know what they say: When life gives you lemons...go murder a clown.",
+                "PSSST I know who you are... Hail Sithis!",
+                "Never should have come here...",
+                "Talos be with you.",
+                "That is one BIG... HAMMER",
+                "You'll make a fine rug cat!",
+                "You remind me of my cousin's cat. Killed that one, too!",
+                "Glad to be traveling with someone who seems competent. My last employer died trying to tackle an entire fort of bandits alone",
+                "They think us all lawless beasts but, I'm proof of their ignorance.",
+                "They got a nickname for anyone who trifles with us guards in Windhelm: Suicide.",
+                "ZU'U UNSLAAD, ZU'U NIS OBLAAN!",
+                "Legends don't burn down villages",
+                "Sweat mother, sweat mother, send your child unto me. For the sins of the unworthy must be baptized in blood and fear.",
+                "Might head down to the meadery later. Let me guess, someone stole your sweetroll.",
+                "Give Ulfric my regards.",
+                "I am not a boy but neither am I a man",
+                "What are you in prison for?\" \"Assault, theft, murder, and lollygagging.",
+                "So this is Raven Rock, Eh? Not all that much to look at"
         };
-        return wordlist[ThreadLocalRandom.current().nextInt(wordlist.length)];
+
+        String textToPrint;
+
+        if (ThreadLocalRandom.current().nextInt(10) == 0) {
+            textToPrint = "\""+ wordlist[ThreadLocalRandom.current().nextInt(wordlist.length)] + "\"";
+        } else {
+            textToPrint = "";
+        }
+
+        System.out.print(CYAN + textToPrint);
+        System.out.println(RESET);
     }
 
     public static void printHelpText() {
-        System.out.println("this is a help text. no clue what to write here. just wander around, get loot and kill some dragons!");
+        System.out.println(RESET + "this is a help text. no clue what to write here. just wander around, get loot and kill some dragons!");
     }
 
     public static void printHP(Creature creature) {
@@ -97,7 +135,7 @@ public class GameTexts {
 
     public static void printDead(Creature creature) {
         if (creature.isPlayer()) {
-            System.out.println("You died :(");
+            System.out.println("You died :( \n want to play one more?");
         } else {
             System.out.println("You crushed " + creature.getName());
         }
@@ -143,4 +181,7 @@ public class GameTexts {
         }
     }
 
+    public static void printEpilogue(Creature player) {
+        System.out.println("You've finished the game!");
+    }
 }
