@@ -15,6 +15,13 @@ public class Loot extends Item implements IPrintable {
         quantity = 1;
     }
 
+    public Loot(String name, String description, int weight, int quantity) {
+        super(name);
+        setDescription(description);
+        this.weight = weight;
+        this.quantity = quantity;
+    }
+
     public int getWeight() {
         return weight * quantity;
     }

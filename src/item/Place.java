@@ -9,8 +9,8 @@ public class Place extends Item implements IPrintable {
 
     private LocationPlan locationPlan;
 
-    public Place(String name, LocationPlan locationPlan) {
-        super(name);
+    public Place(LocationPlan locationPlan) {
+        super(locationPlan.getName());
         this.locationPlan = locationPlan;
     }
 

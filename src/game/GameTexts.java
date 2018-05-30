@@ -2,12 +2,23 @@ package game;
 
 import item.Creature;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author Ondřej Michálek me@michondr.cz || mico00@vse.cz
  */
 public class GameTexts {
+
+    public static final String RESET = "\u001B[0m";
+    public static final String BLACK = "\u001B[30m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String PURPLE = "\u001B[35m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String WHITE = "\u001B[37m";
+
     public static void printWelcome() {
         System.out.println("Hello and welcome to dragons&code!");
     }
@@ -51,7 +62,7 @@ public class GameTexts {
                 "Holly molly coca-cola koala",
                 "You're a warrior, you deserve the best!",
         };
-        return wordlist[new Random().nextInt(wordlist.length)];
+        return wordlist[ThreadLocalRandom.current().nextInt(wordlist.length)];
     }
 
     public static void printHelpText() {
@@ -59,20 +70,29 @@ public class GameTexts {
     }
 
     public static void printHP(Creature creature) {
-        String text = "";
+        String text;
 
         if (creature.isPlayer()) {
-            text = "Your hp ";
+            text = "Your hp: ";
         } else {
-            text = "Enemy hp ";
+            text = "Enemy hp: ";
         }
 
-        if (creature.getHp() < creature.getHpInitial() / 10) {
-            System.out.print((char) 27 + "[31m" + text + creature.getHp());
+        if (creature.getHp() <= creature.getHpInitial() / 10) {
+            System.out.print(RED + text + creature.getHp());
         } else {
-            System.out.print((char) 27 + "[32m" + text + creature.getHp());
+            System.out.print(GREEN + text + creature.getHp());
         }
-        System.out.println((char) 27 + "[39m");
+        System.out.println(RESET);
+    }
+
+    public static void printHit(Creature creature) {
+        if (creature.isPlayer()) {
+            System.out.print(PURPLE + "Your hit: " + creature.getHit());
+        } else {
+            System.out.print(PURPLE + creature.getName() + "s hit" + creature.getHit());
+        }
+        System.out.println(RESET);
     }
 
     public static void printDead(Creature creature) {
@@ -81,6 +101,21 @@ public class GameTexts {
         } else {
             System.out.println("You crushed " + creature.getName());
         }
+    }
+
+    public static void printCreatureColoredSymbol(Creature creature, Creature player) {
+        if (creature.getHit() * 3 > player.getHp() || creature.getHp() > player.getHit() * 3) {
+            System.out.print(RED + creature.getSymbol());
+        } else {
+            System.out.print(creature.getSymbol());
+        }
+
+        System.out.print(RESET);
+    }
+
+    public static void printTextInBlue(String text){
+        System.out.print(BLUE + text);
+        System.out.println(RESET);
     }
 
 }

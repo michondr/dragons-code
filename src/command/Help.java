@@ -24,6 +24,7 @@ public class Help implements ICommand {
     public void init(Game game) {
         LocationPrinter.printHelp(game);
         GameTexts.printHP(game.getPlayer());
+        GameTexts.printHit(game.getPlayer());
     }
 
     @Override

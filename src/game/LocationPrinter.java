@@ -2,6 +2,7 @@ package game;
 
 import command.ICommand;
 import item.Creature;
+import item.Dragon;
 import item.Item;
 import item.Loot;
 
@@ -13,6 +14,8 @@ public class LocationPrinter {
     static void printPlan(LocationPlan plan, Game game) {
         Location endpoint = plan.getPlanSizeEndpoint();
         Creature player = game.getPlayer();
+
+        GameTexts.printTextInBlue(plan.getName());
         printEndRow(endpoint.getX());
 
         for (int y = 0; y < endpoint.getY(); y++) {
@@ -25,10 +28,12 @@ public class LocationPrinter {
                     continue;
                 }
 
-                Item curItem = plan.getItemOnLocation(curLoc);
+                Item curItem = plan.getItemByLocation(curLoc);
 
                 if (curItem == null) {
                     System.out.print(" ");
+                } else if (curItem.getClass() == Creature.class || curItem.getClass() == Dragon.class) {
+                    GameTexts.printCreatureColoredSymbol((Creature) curItem, game.getPlayer());
                 } else {
                     System.out.print(curItem.getSymbol());
                 }
@@ -72,8 +77,8 @@ public class LocationPrinter {
 
         System.out.println(
                 loot.getName() + "\t"
-                + loot.getWeight() + "\t"
-                + loot.getDescription()
+                        + loot.getWeight() + "\t"
+                        + loot.getDescription()
         );
     }
 

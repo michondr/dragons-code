@@ -1,17 +1,13 @@
 package game;
 
 import command.ICommand;
-import command.move.Up;
-import item.Creature;
-import item.Item;
-import item.Loot;
-import item.Place;
+import item.*;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author Ondřej Michálek me@michondr.cz || mico00@vse.cz
@@ -26,13 +22,59 @@ public class Game extends JFrame {
     public void init() {
 
         // player
-        player = new Creature("hero michondr");
+        player = new Creature("Laat Dovahkiin");
         player.setPlayer(true);
+        player.setHpInitial(100);
         player.setHp(100);
-        player.setHit(1);
+        player.setHit(20);
         player.setLocation(new Location(0, 0));
 
-        // base location
+        // Helgen
+        LocationPlan helgen = new LocationPlan("Helgen",16, 8);
+
+        GameItemsFactory.createItems(helgen,
+                new Creature("Malpenar Lusius", "Leader of this unit, half of his men died during an attack of a dragon", false, true, 150, 10),
+                new Creature("Arenara Acicius"),
+                new Creature("Oritonde Cedus"),
+                new Creature("Clagius Entius"),
+                new Creature("Namana Egnatius"),
+                new Loot("broken arrow", "hit impenetrable dragon scale", 0, 1),
+                new Loot("imperial sword", "+2 hit", 3, 1)
+        );
+
+        // Falkreath
+        LocationPlan falkreath = new LocationPlan("Falkreath",25, 7);
+
+        GameItemsFactory.createItems(falkreath,
+                new Dragon("Odahviing", "As for myself, you've proven your mastery twice over. Thuri, Dovahkiin. I gladly acknowledge the power of your Thu'um", 20, 30),
+                new Creature("Jarl Siddgeir", "jarl of Falkreath", true, false, 100, 1),
+                new Creature("Dro'Baad", "bandit", false, true, 101, 13),
+                new Creature("Ri'Dat", "bandit", false, true, 95, 1),
+                new Creature("Wadargo", "bandit", false, true, 102, 8),
+                new Loot("gold", "", 0, 20)
+        );
+
+        GameItemsFactory.addLootToCreature(falkreath, "Odahviing",
+                new Loot("dragon soul", "from Odahviing", 100, 1),
+                new Loot("gold", "", 0, 100)
+        );
+
+        GameItemsFactory.addLootToCreature(falkreath, "Ri'Dat",
+                new Loot("khajit needle", "+12 hit",  4, 1),
+                new Loot("furry armor", "+10 armor",  5, 1)
+                );
+
+        Place doorToFalkreath = new Place(falkreath);
+        doorToFalkreath.setLocation(new Location(1, 1));
+        helgen.addItem(doorToFalkreath);
+
+        Place doorToHelgen = new Place(helgen);
+        falkreath.addItem(doorToHelgen);
+        doorToHelgen.setLocation(new Location(1, 1));
+
+
+        /*
+
         baseLocation = new LocationPlan(30, 10);
 
         Creature zombie = new Creature("zombie");
@@ -70,10 +112,13 @@ public class Game extends JFrame {
         churchPlan.addItem(dragonscale);
 
         Place church = new Place("church", churchPlan);
+        churchPlan.addItem(new Place("base", baseLocation));
         baseLocation.addItem(church);
 
+*/
         // finishing touches
-        currentLocation = baseLocation;
+        currentLocation = helgen;
+        baseLocation = falkreath;
         currentLocation.printPlan(this);
         handleKeyPresses();
     }
@@ -89,7 +134,7 @@ public class Game extends JFrame {
                 if (command == null) {
                     System.err.println("Not valid command key, try again");
                 } else {
-                    if(command.isMove()){
+                    if (command.isMove()) {
                         handleMovingCreatures();
                     }
                     command.init(currentGame);
@@ -101,7 +146,7 @@ public class Game extends JFrame {
     }
 
     private void handleCurrentLocationInfo() {
-        Item itemOnLocation = getCurrentPlan().getItemOnLocation(getPlayer().getLocation());
+        Item itemOnLocation = getCurrentPlan().getItemByLocation(getPlayer().getLocation());
 
         if (itemOnLocation == null) {
             System.out.println(GameTexts.getWanderText());
@@ -116,11 +161,10 @@ public class Game extends JFrame {
                 continue;
             }
 
-            Random ra = new Random();
             int randX = 0;
             int randY = 0;
 
-            switch (ra.nextInt(5)) {
+            switch (ThreadLocalRandom.current().nextInt(5)) {
                 case 1:
                     randX = 1;
                     randY = 0;
@@ -179,6 +223,11 @@ public class Game extends JFrame {
         currentLocation = plan;
         player.setLocation(new Location(0, 0));
         currentLocation.printPlan(this);
+
+        getPlayer().setHp(getPlayer().getHpInitial());
+        for (Creature creature : currentLocation.getCreatures()) {
+            creature.setHp(creature.getHpInitial());
+        }
     }
 
     public LocationPlan getBaseLocation() {

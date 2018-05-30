@@ -1,13 +1,10 @@
 package game;
 
-import item.Creature;
-import item.Item;
-import item.Place;
-import item.Loot;
+import item.*;
 
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 /**
@@ -33,13 +30,16 @@ public class LocationPlan {
     private Set<Place> places;
     private Set<Loot> loot;
     private Set<Creature> creatures;
-    private Set<Location> usedLocations;
+    private Set<Dragon> dragons;
+    private String name;
 
-    LocationPlan(int xDim, int yDim) {
+    LocationPlan(String name, int xDim, int yDim) {
+        this.name = name;
         this.endpoint = new Location(xDim, yDim);
         this.places = new HashSet<>();
         this.loot = new HashSet<>();
         this.creatures = new HashSet<>();
+        this.dragons = new HashSet<>();
     }
 
     public Location getPlanSizeEndpoint() {
@@ -58,17 +58,26 @@ public class LocationPlan {
         return creatures;
     }
 
+    public Set<Dragon> getDragons() {
+        return dragons;
+    }
+
     public void addItem(Item item) {
         Location loc = item.getLocation();
 
         if (loc == null) {
-            Random ra = new Random();
+            ThreadLocalRandom ra = ThreadLocalRandom.current();
             Location newLoc = new Location(ra.nextInt(endpoint.getX()), ra.nextInt(endpoint.getY()));
             item.setLocation(newLoc);
         }
 
         if(item.getClass() == Creature.class){
             creatures.add((Creature) item);
+            return;
+        }
+
+        if(item.getClass() == Dragon.class){
+            dragons.add((Dragon) item);
             return;
         }
 
@@ -86,6 +95,7 @@ public class LocationPlan {
         Set<Item> used = new HashSet<>();
 
         used.addAll(creatures);
+        used.addAll(dragons);
         used.addAll(places);
         used.addAll(loot);
 
@@ -99,7 +109,7 @@ public class LocationPlan {
                 .collect(Collectors.toSet());
     }
 
-    public Item getItemOnLocation(Location loc) {
+    public Item getItemByLocation(Location loc) {
         return getUsedItems()
                 .stream()
                 .filter(x -> x.getLocation().equals(loc))
@@ -107,7 +117,19 @@ public class LocationPlan {
                 .orElse(null);
     }
 
+    public Item getItemByName(String name) {
+        return getUsedItems()
+                .stream()
+                .filter(x -> x.getName().equals(name))
+                .findFirst()
+                .orElse(null);
+    }
+
     public void printPlan(Game game) {
         LocationPrinter.printPlan(this, game);
+    }
+
+    public String getName() {
+        return name;
     }
 }

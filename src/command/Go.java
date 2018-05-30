@@ -22,7 +22,7 @@ public class Go implements ICommand {
 
     @Override
     public void init(Game game) {
-        Item itemOnLocation = game.getCurrentPlan().getItemOnLocation(game.getPlayer().getLocation());
+        Item itemOnLocation = game.getCurrentPlan().getItemByLocation(game.getPlayer().getLocation());
 
         if(itemOnLocation == null){
             return;

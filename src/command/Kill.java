@@ -3,6 +3,7 @@ package command;
 import game.Game;
 import game.GameTexts;
 import item.Creature;
+import item.Dragon;
 import item.Item;
 
 /**
@@ -22,18 +23,21 @@ public class Kill implements ICommand {
 
     @Override
     public void init(Game game) {
-        Item itemOnLocation = game.getCurrentPlan().getItemOnLocation(game.getPlayer().getLocation());
+        Item itemOnLocation = game.getCurrentPlan().getItemByLocation(game.getPlayer().getLocation());
 
         if (itemOnLocation == null) {
             return;
         }
 
-        if (itemOnLocation.getClass() == Creature.class) {
+        if (itemOnLocation.getClass() == Creature.class || itemOnLocation.getClass() == Dragon.class) {
             Creature creature = (Creature) itemOnLocation;
             Creature player = game.getPlayer();
 
-            creature.setHp(creature.getHp() - player.getHit());
-            player.setHp(player.getHp() - creature.getHit());
+            creature.setHp(creature.getHp() - player.getHitRandomized());
+
+            if(!creature.isFriendly()){
+                player.setHp(player.getHp() - creature.getHitRandomized());
+            }
 
             if (player.getHp() <= 0) {
                 GameTexts.printDead(player);

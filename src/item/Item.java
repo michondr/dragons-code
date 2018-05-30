@@ -44,10 +44,10 @@ public class Item implements IPrintable {
     public String toString() {
         String delimitered = "";
 
-        if(!description.equals("")){
+        if (!description.equals("")) {
             delimitered = " - " + description;
         }
-        return super.getClass().getSimpleName() + " " + name + delimitered + "\n";
+        return "(" + super.getClass().getSimpleName() + ") " + name + delimitered + "\n";
     }
 
     @Override
