@@ -30,95 +30,82 @@ public class Game extends JFrame {
         player.setLocation(new Location(0, 0));
 
         // Helgen
-        LocationPlan helgen = new LocationPlan("Helgen",16, 8);
-
-        GameItemsFactory.createItems(helgen,
-                new Creature("Malpenar Lusius", "Leader of this unit, half of his men died during an attack of a dragon", false, true, 150, 10),
-                new Creature("Arenara Acicius"),
-                new Creature("Oritonde Cedus"),
-                new Creature("Clagius Entius"),
-                new Creature("Namana Egnatius"),
-                new Loot("broken arrow", "hit impenetrable dragon scale", 0, 1),
-                new Loot("imperial sword", "+2 hit", 3, 1)
-        );
+        LocationPlan helgen = new LocationPlan("Helgen",16, 6);
 
         // Falkreath
-        LocationPlan falkreath = new LocationPlan("Falkreath",25, 7);
+        LocationPlan falkreath = new LocationPlan("Falkreath",35, 10);
 
-        GameItemsFactory.createItems(falkreath,
-                new Dragon("Odahviing", "As for myself, you've proven your mastery twice over. Thuri, Dovahkiin. I gladly acknowledge the power of your Thu'um", 20, 30),
-                new Creature("Jarl Siddgeir", "jarl of Falkreath", true, false, 100, 1),
-                new Creature("Dro'Baad", "bandit", false, true, 101, 13),
-                new Creature("Ri'Dat", "bandit", false, true, 95, 1),
-                new Creature("Wadargo", "bandit", false, true, 102, 8),
-                new Loot("gold", "", 0, 20)
-        );
+        // Riften
+        LocationPlan riften = new LocationPlan("Riften", 30, 6);
 
-        GameItemsFactory.addLootToCreature(falkreath, "Odahviing",
-                new Loot("dragon soul", "from Odahviing", 100, 1),
-                new Loot("gold", "", 0, 100)
-        );
+        // Windhelm
+        LocationPlan windhelm = new LocationPlan("Windhelm", 30, 13);
 
-        GameItemsFactory.addLootToCreature(falkreath, "Ri'Dat",
-                new Loot("khajit needle", "+12 hit",  4, 1),
-                new Loot("furry armor", "+10 armor",  5, 1)
-                );
+        // Winterhold
+        LocationPlan winterhold = new LocationPlan("Winterhold", 45, 20);
 
-        Place doorToFalkreath = new Place(falkreath);
-        doorToFalkreath.setLocation(new Location(1, 1));
-        helgen.addItem(doorToFalkreath);
+        // Dawnstar
+        LocationPlan downstar = new LocationPlan("Dawnstar", 20, 18);
 
-        Place doorToHelgen = new Place(helgen);
-        falkreath.addItem(doorToHelgen);
-        doorToHelgen.setLocation(new Location(1, 1));
+        // Morthal
+        LocationPlan morthal = new LocationPlan("Morthal", 30, 16);
+
+        // Solitude
+        LocationPlan solitude = new LocationPlan("Solitude", 30, 10);
+
+        // Markarth
+        LocationPlan markarth = new LocationPlan("Markarth", 35, 28);
+
+        // Whiterun
+        LocationPlan whiterun = new LocationPlan("Whiterun", 65, 20);
+
+        // placing doors
+        GameItemsFactory.createDoor(helgen, falkreath, new Location(1, 5), "Kill Ri'Dat and boots your armour and hit");
+
+        GameItemsFactory.createDoor(falkreath, helgen, new Location(22, 2), "terrible dragon attack happened here, you must find out!");
+        GameItemsFactory.createDoor(falkreath, markarth, new Location(0, 4));
+        GameItemsFactory.createDoor(falkreath, whiterun, new Location(10, 0));
+        GameItemsFactory.createDoor(falkreath, riften, new Location(falkreath.getPlanSizeEndpoint().getX()-1, 7));
+
+        GameItemsFactory.createDoor(riften, falkreath, new Location(0, 3));
+        GameItemsFactory.createDoor(riften, whiterun, new Location(1, 0));
+        GameItemsFactory.createDoor(riften, windhelm, new Location(18, 0));
+
+        GameItemsFactory.createDoor(windhelm, riften, new Location(17, windhelm.getPlanSizeEndpoint().getY()-1));
+        GameItemsFactory.createDoor(windhelm, whiterun, new Location(0, 7));
+        GameItemsFactory.createDoor(windhelm, winterhold, new Location(4, 0));
+
+        GameItemsFactory.createDoor(winterhold, windhelm, new Location(35, winterhold.getPlanSizeEndpoint().getY()-1));
+        GameItemsFactory.createDoor(winterhold, downstar, new Location(0, 10));
+
+        GameItemsFactory.createDoor(downstar, whiterun, new Location(5, downstar.getPlanSizeEndpoint().getY()-1));
+        GameItemsFactory.createDoor(downstar, morthal, new Location(0, 9));
+        GameItemsFactory.createDoor(downstar, winterhold, new Location(downstar.getPlanSizeEndpoint().getX()-1, downstar.getPlanSizeEndpoint().getY()-4));
+
+        GameItemsFactory.createDoor(morthal, whiterun, new Location(14, morthal.getPlanSizeEndpoint().getY()-1));
+        GameItemsFactory.createDoor(morthal, markarth, new Location(0, 10));
+        GameItemsFactory.createDoor(morthal, solitude, new Location(6, 0));
+        GameItemsFactory.createDoor(morthal, downstar, new Location(morthal.getPlanSizeEndpoint().getX()-1, 6));
+
+        GameItemsFactory.createDoor(solitude, morthal, new Location(25, solitude.getPlanSizeEndpoint().getY()-1));
+        GameItemsFactory.createDoor(solitude, markarth, new Location(2, solitude.getPlanSizeEndpoint().getY()-1));
+
+        GameItemsFactory.createDoor(markarth, solitude, new Location(3, 0));
+        GameItemsFactory.createDoor(markarth, morthal, new Location(markarth.getPlanSizeEndpoint().getX()-1, 6));
+        GameItemsFactory.createDoor(markarth, whiterun, new Location(markarth.getPlanSizeEndpoint().getX()-1, 10));
+        GameItemsFactory.createDoor(markarth, falkreath, new Location(markarth.getPlanSizeEndpoint().getX()-1, markarth.getPlanSizeEndpoint().getY()-1));
+
+        GameItemsFactory.createDoor(whiterun, falkreath, new Location(30, whiterun.getPlanSizeEndpoint().getY()-1));
+        GameItemsFactory.createDoor(whiterun, markarth, new Location(0, 10));
+        GameItemsFactory.createDoor(whiterun, morthal, new Location(20,0));
+        GameItemsFactory.createDoor(whiterun, downstar, new Location(55,0));
+        GameItemsFactory.createDoor(whiterun, windhelm, new Location(whiterun.getPlanSizeEndpoint().getX()-1, 6));
+        GameItemsFactory.createDoor(whiterun, riften, new Location(whiterun.getPlanSizeEndpoint().getX()-1, whiterun.getPlanSizeEndpoint().getY()-5));
 
 
-        /*
-
-        baseLocation = new LocationPlan(30, 10);
-
-        Creature zombie = new Creature("zombie");
-        zombie.setLocation(new Location(0, 1));
-        zombie.setMoving(true);
-        zombie.setHp(2);
-        zombie.setHpInitial(100);
-        zombie.setHit(3);
-        baseLocation.addItem(zombie);
-
-        Creature zombie2 = new Creature("zombie");
-        baseLocation.addItem(zombie2);
-
-        Loot bagOfMoney = new Loot("moneyyy");
-        bagOfMoney.setWeight(10);
-        baseLocation.addItem(bagOfMoney);
-
-        Loot gold1 = new Loot("gold");
-        baseLocation.addItem(gold1);
-        Loot gold2 = new Loot("gold");
-        baseLocation.addItem(gold2);
-        Loot gold3 = new Loot("gold");
-        baseLocation.addItem(gold3);
-
-        // church
-        LocationPlan churchPlan = new LocationPlan(10, 4);
-        Loot table = new Loot("table");
-        table.setPortable(false);
-        table.setDescription("Aither, the antient one, was killed here by King the David");
-        churchPlan.addItem(table);
-
-        Loot dragonscale = new Loot("Dragonscale");
-        dragonscale.setWeight(8);
-        dragonscale.setDescription("The dragon slayer");
-        churchPlan.addItem(dragonscale);
-
-        Place church = new Place("church", churchPlan);
-        churchPlan.addItem(new Place("base", baseLocation));
-        baseLocation.addItem(church);
-
-*/
         // finishing touches
-        currentLocation = helgen;
-        baseLocation = falkreath;
+        currentLocation = falkreath;
+        baseLocation = helgen;
         currentLocation.printPlan(this);
         handleKeyPresses();
     }
@@ -221,7 +208,6 @@ public class Game extends JFrame {
 
     public void setCurrentPlan(LocationPlan plan) {
         currentLocation = plan;
-        player.setLocation(new Location(0, 0));
         currentLocation.printPlan(this);
 
         getPlayer().setHp(getPlayer().getHpInitial());

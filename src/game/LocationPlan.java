@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 public class LocationPlan {
 
     private Location endpoint;
-    private Set<Place> places;
+    private Set<Door> doors;
     private Set<Loot> loot;
     private Set<Creature> creatures;
     private Set<Dragon> dragons;
@@ -36,7 +36,7 @@ public class LocationPlan {
     LocationPlan(String name, int xDim, int yDim) {
         this.name = name;
         this.endpoint = new Location(xDim, yDim);
-        this.places = new HashSet<>();
+        this.doors = new HashSet<>();
         this.loot = new HashSet<>();
         this.creatures = new HashSet<>();
         this.dragons = new HashSet<>();
@@ -46,8 +46,8 @@ public class LocationPlan {
         return endpoint;
     }
 
-    public Set<Place> getPlaces() {
-        return places;
+    public Set<Door> getDoors() {
+        return doors;
     }
 
     public Set<Loot> getLoot() {
@@ -86,8 +86,8 @@ public class LocationPlan {
             return;
         }
 
-        if(item.getClass() == Place.class){
-            places.add((Place) item);
+        if(item.getClass() == Door.class){
+            doors.add((Door) item);
         }
     }
 
@@ -96,7 +96,7 @@ public class LocationPlan {
 
         used.addAll(creatures);
         used.addAll(dragons);
-        used.addAll(places);
+        used.addAll(doors);
         used.addAll(loot);
 
         return used;
