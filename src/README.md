@@ -5,6 +5,7 @@ You kill enemies, gain loot, boost armour and strength, and you defeat dragons.
 Your quest is to kill dragon by name Alduin, the World Eater
 
 Game is designed to run in IntelliJ IDEA console, do dimensions of planes compensate output font not being rectangular.
+Java version is 9.0
 
 ## story
 The player character is a prisoner being led to an Imperial execution in Helgen. 
@@ -50,7 +51,6 @@ when you kill Alduin, or any time you die
 ## game plan
 
 ![game plan](https://lh3.googleusercontent.com/040LDKgV1MaAs22ezI28rNO4SOKv9IBNQ_xGz4rN1Y45EmIAqQOCG9h4tRmp6gxwNTl5cxce6_Urgq8yI7IJkqj_Mgx17t1TeVZXSWj3D_OmEE6e74_ylo6jvcOZMnZmV4U6lhOpFMk=w1246-h934-no "game plan")
-
 
 ## TODO
 * JUnit tests - game is so advanced that I had no time and joy in writing those
