@@ -24,7 +24,8 @@ public class LocationPrinter {
                 Location curLoc = new Location(x, y);
 
                 if (player.getLocation().equals(curLoc)) {
-                    System.out.print(player.getSymbol());
+                    System.out.print(GameTexts.YELLOW + player.getSymbol());
+                    System.out.print(GameTexts.RESET);
                     continue;
                 }
 

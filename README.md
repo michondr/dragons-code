@@ -28,8 +28,8 @@ By collecting items you can change your hp and hit.
 
 Game plans are displayed in ASCII art-like graphics with following symbols:
 * `|` and `-` for borders
-* `@` player location
-* `!` creature you can kill
+* `@` player location (yellow)
+* `!` creature you can kill (default white, red when you're unlikely to succeed)
 * `$` loot you can collect
 * `#` door/road to location you can go to
 
@@ -44,6 +44,13 @@ This especially applies to dragons which are hard to match your position with th
 Also creatures which are likely to kill you are red.
 
 Hit you give to creatures and hit you receive is randomized between +- 10% of set hit.
+
+## game start
+simply run class `Main`. Small window should pop up and hold focus (you need to keep this window focused so the game can receive commands).
+
+In IntelliJ console will be printed help text, set of commands and game plan of base location.
+
+Unfortunately console does not get cleared after your each move, you need to focus on last printed plan
 
 ## game end
 when you kill Alduin, or any time you die
