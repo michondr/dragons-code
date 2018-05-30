@@ -38,9 +38,13 @@ public class Fight implements ICommand {
             Creature creature = (Creature) itemOnLocation;
             Creature player = game.getPlayer();
 
+            if (!creature.isFriendly()) {
+                player.setHp(player.getHp() - creature.getHitRandomized());
+            }
+
             creature.setHp(creature.getHp() - player.getHitRandomized());
 
-            if (!creature.isFriendly()) {
+            if (creature.isFriendly()) {
                 player.setHp(player.getHp() - creature.getHitRandomized());
             }
 

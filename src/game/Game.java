@@ -318,7 +318,7 @@ public class Game extends JFrame {
         // finishing touches
         Help.print(this);
         currentLocation = helgen;
-        baseLocation = winterhold;
+        baseLocation = helgen;
         currentLocation.printPlan(this);
         handleKeyPresses();
     }
@@ -341,6 +341,9 @@ public class Game extends JFrame {
                     command.init(currentGame);
                     handleCurrentLocationInfo();
 
+                    if(command.isMove()){
+                        GameTexts.printWanderText();
+                    }
                 }
             }
         });
@@ -349,9 +352,7 @@ public class Game extends JFrame {
     private void handleCurrentLocationInfo() {
         Item itemOnLocation = getCurrentPlan().getItemByLocation(getPlayer().getLocation());
 
-        if (itemOnLocation == null) {
-            GameTexts.printWanderText();
-        } else {
+        if (itemOnLocation != null) {
             System.out.println(itemOnLocation.toString());
         }
     }

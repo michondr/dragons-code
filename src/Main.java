@@ -9,6 +9,11 @@ import java.util.Set;
 
 /**
  * @author Ondřej Michálek me@michondr.cz || mico00@vse.cz
+ *
+ * Simple java game inspired by
+ * Your quest is to kill Alduin, the World Eater
+ *
+ *
  */
 public class Main {
 
