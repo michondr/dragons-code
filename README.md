@@ -63,3 +63,4 @@ when you kill Alduin, or any time you die
 ## TODO
 * JUnit tests - game is so advanced that I had no time and joy in writing those
 * play testing and fiddling with hp and hit of creatures and boosts to have best play
+* handle problems that items in plan can be one on another, which can make problems when a door is hidden
