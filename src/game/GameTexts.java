@@ -94,13 +94,11 @@ public class GameTexts {
         String textToPrint;
 
         if (ThreadLocalRandom.current().nextInt(10) == 0) {
-            textToPrint = "\""+ wordlist[ThreadLocalRandom.current().nextInt(wordlist.length)] + "\"";
-        } else {
-            textToPrint = "";
-        }
+            textToPrint = "\"" + wordlist[ThreadLocalRandom.current().nextInt(wordlist.length)] + "\"";
 
-        System.out.print(CYAN + textToPrint);
-        System.out.println(RESET);
+            System.out.print(CYAN + textToPrint);
+            System.out.println(RESET);
+        }
     }
 
     public static void printHelpText() {
