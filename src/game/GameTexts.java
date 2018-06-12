@@ -6,6 +6,7 @@ import item.Dragon;
 import item.Item;
 import item.Loot;
 
+import java.io.IOException;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -227,6 +228,26 @@ public class GameTexts {
         }
 
         printEndRow(endpoint.getX());
+    }
+
+    private static void clearConsole() {
+        try
+        {
+            final String os = System.getProperty("os.name");
+
+            if (os.contains("Windows"))
+            {
+                Runtime.getRuntime().exec("cls");
+            }
+            else
+            {
+                Runtime.getRuntime().exec("clear");
+            }
+        }
+        catch (final Exception e)
+        {
+            System.err.println(e.getMessage());
+        }
     }
 
     private static void printEndRow(int size) {

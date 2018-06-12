@@ -319,7 +319,7 @@ public class Game extends JFrame {
         Help.print(this);
         currentLocation = helgen;
         baseLocation = helgen;
-        currentLocation.printPlan(this);
+        currentLocation.printPlan(this, false);
         handleKeyPresses();
     }
 
