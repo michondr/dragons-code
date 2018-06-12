@@ -344,7 +344,7 @@ public class Game extends JFrame {
                     command.init(currentGame);
                     handleCurrentLocationInfo();
 
-                    if(command.isMove()){
+                    if (command.isMove()) {
                         GameTexts.printWanderText();
                     }
                 }
@@ -485,6 +485,10 @@ public class Game extends JFrame {
 
     public Creature getPlayer() {
         return player;
+    }
+
+    public void setPlayer(Creature creature) {
+        this.player = creature;
     }
 
     public LocationPlan getCurrentPlan() {

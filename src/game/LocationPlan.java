@@ -34,7 +34,7 @@ public class LocationPlan {
     private Set<Dragon> dragons;
     private String name;
 
-    LocationPlan(String name, int xDim, int yDim) {
+    public LocationPlan(String name, int xDim, int yDim) {
         this.name = name;
         this.endpoint = new Location(xDim, yDim);
         this.doors = new HashSet<>();

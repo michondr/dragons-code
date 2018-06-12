@@ -5,6 +5,10 @@ package item;
  */
 public class Dragon extends Creature implements IPrintable {
 
+    public Dragon(String name) {
+        super(name);
+    }
+
     public Dragon(String name, String desription, int hp, int hit, Loot ... loots) {
         super(name, desription, false, true, hp, hit, loots);
     }

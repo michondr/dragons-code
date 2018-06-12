@@ -38,15 +38,7 @@ public class Fight implements ICommand {
             Creature creature = (Creature) itemOnLocation;
             Creature player = game.getPlayer();
 
-            if (!creature.isFriendly()) {
-                player.setHp(player.getHp() - creature.getHitRandomized());
-            }
-
-            creature.setHp(creature.getHp() - player.getHitRandomized());
-
-            if (creature.isFriendly()) {
-                player.setHp(player.getHp() - creature.getHitRandomized());
-            }
+            handleCreatureHp(player, creature);
 
             if (player.getHp() <= 0) {
                 GameTexts.printDead(player);
@@ -56,15 +48,15 @@ public class Fight implements ICommand {
             if (creature.getHp() <= 0) {
                 GameTexts.printDead(creature);
 
-                if(itemOnLocation.getClass() == Creature.class){
+                if (itemOnLocation.getClass() == Creature.class) {
                     game.getCurrentPlan().getCreatures().remove(creature);
                 }
-                if(itemOnLocation.getClass() == Dragon.class){
+                if (itemOnLocation.getClass() == Dragon.class) {
                     game.getCurrentPlan().getDragons().remove((Dragon) creature);
                 }
                 player.addLoot(creature.getLootSet());
 
-                if(creature.getLootSet().size() > 0){
+                if (creature.getLootSet().size() > 0) {
                     player.setHp(player.getHpInitial());
                     for (Creature creatureInPlan : game.getCurrentPlan().getCreatures()) {
                         creatureInPlan.setHp(creatureInPlan.getHpInitial());
@@ -79,9 +71,21 @@ public class Fight implements ICommand {
         checkGameEnd(game.getPlayer());
     }
 
+    public void handleCreatureHp(Creature player, Creature creature) {
+        if (!creature.isFriendly()) {
+            player.setHp(player.getHp() - creature.getHitRandomized());
+        }
+
+        creature.setHp(creature.getHp() - player.getHitRandomized());
+
+        if (creature.isFriendly()) {
+            player.setHp(player.getHp() - creature.getHitRandomized());
+        }
+    }
+
     private void checkGameEnd(Creature player) {
         for (Loot loot : player.getLootSet()) {
-            if(loot.getName().equals("dragon soul") && loot.getDescription().equals("from Alduin")){
+            if (loot.getName().equals("dragon soul") && loot.getDescription().equals("from Alduin")) {
                 GameTexts.printEpilogue(player);
                 GameTexts.printGoodbye();
                 System.exit(0);
