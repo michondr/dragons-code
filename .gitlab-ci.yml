@@ -1,8 +1,8 @@
 image: kaiwinter/docker-java8-maven
 
-sestaveni:
+artifacting:
     script:
-        - "mvn install -B"
+        - "mvn install -Be"
     only:
         - master
 
