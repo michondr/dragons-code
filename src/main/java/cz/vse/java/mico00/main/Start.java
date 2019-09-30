@@ -6,6 +6,11 @@ package cz.vse.java.mico00.main;
 
 import cz.vse.java.mico00.logika.*;
 import cz.vse.java.mico00.uiText.TextoveRozhrani;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
 
 /*******************************************************************************
  * Třída {@code Start} je hlavní třídou projektu,
@@ -14,7 +19,7 @@ import cz.vse.java.mico00.uiText.TextoveRozhrani;
  * @author    jméno autora
  * @version   0.00.000
  */
-public class Start
+public class Start extends Application
 {
     /***************************************************************************
      * Metoda, prostřednictvím níž se spouští celá aplikace.
@@ -24,8 +29,18 @@ public class Start
     public static void main(String[] args)
     {
         
-        IHra hra = new Hra();
-        TextoveRozhrani ui = new TextoveRozhrani(hra);
-        ui.hraj();
+//        IHra hra = new Hra();
+//        TextoveRozhrani ui = new TextoveRozhrani(hra);
+//        ui.hraj();
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        GridPane root = FXMLLoader.load(getClass().getResource("/hlavni.fxml"));
+
+        stage.setTitle("blabal");
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }
