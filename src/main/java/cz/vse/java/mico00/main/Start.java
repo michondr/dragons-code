@@ -3,7 +3,6 @@
 package cz.vse.java.mico00.main;
 
 
-
 import cz.vse.java.mico00.logika.*;
 import cz.vse.java.mico00.uiText.TextoveRozhrani;
 import javafx.application.Application;
@@ -16,23 +15,23 @@ import javafx.fxml.FXMLLoader;
  * Třída {@code Start} je hlavní třídou projektu,
  * který ...
  *
- * @author    jméno autora
- * @version   0.00.000
+ * @author jméno autora
+ * @version 0.00.000
  */
-public class Start extends Application
-{
+public class Start extends Application {
     /***************************************************************************
      * Metoda, prostřednictvím níž se spouští celá aplikace.
      *
      * @param args Parametry příkazového řádku
      */
-    public static void main(String[] args)
-    {
-        
-//        IHra hra = new Hra();
-//        TextoveRozhrani ui = new TextoveRozhrani(hra);
-//        ui.hraj();
-        launch(args);
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            launch(args);
+        } else if (args[0].equals("-text")) {
+            IHra hra = new Hra();
+            TextoveRozhrani ui = new TextoveRozhrani(hra);
+            ui.hraj();
+        }
     }
 
     @Override
