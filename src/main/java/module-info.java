@@ -1,6 +1,7 @@
 module cz.vse.java.mico00 {
     requires javafx.controls;
-    requires javafx.fxml;
+    requires reflections;
+
     exports cz.vse.java.mico00;
-    opens cz.vse.java.mico00.main to javafx.graphics, javafx.fxml;
+    opens cz.vse.java.mico00 to javafx.graphics, javafx.fxml;
 }
