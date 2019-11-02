@@ -20,7 +20,7 @@ public class Quit implements ICommand {
 
     @Override
     public void init(Game game) {
-        GameTexts.printGoodbye();
+        game.getTexts().printGoodbye();
         System.exit(0);
     }
 

@@ -20,7 +20,7 @@ public class Inventory implements ICommand {
 
     @Override
     public void init(Game game) {
-        GameTexts.printInventory(game.getPlayer());
+        game.getTexts().printInventory(game.getPlayer());
     }
 
     @Override

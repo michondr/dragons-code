@@ -6,6 +6,7 @@ import cz.vse.java.mico00.game.LocationPlan;
 import cz.vse.java.mico00.item.Creature;
 import cz.vse.java.mico00.item.Door;
 import cz.vse.java.mico00.item.Item;
+import cz.vse.java.mico00.output.ConsoleOutput;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +20,7 @@ public class  GoTest {
 
     @Before
     public void setUp() {
-        game = new Game();
+        game = new Game(new ConsoleOutput());
         LocationPlan currentPlan = new LocationPlan("current plan", 1, 1);
         LocationPlan locationPlan = new LocationPlan("test plan", 1, 1);
 

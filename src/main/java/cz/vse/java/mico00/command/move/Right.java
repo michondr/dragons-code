@@ -24,9 +24,9 @@ public class Right implements ICommand {
 
         if (canMove(game)) {
             game.getPlayer().editLocation(1, 0);
-            game.getCurrentPlan().printPlan(game);
+            game.getOutput().outputPlan(game);
         } else {
-            GameTexts.printMoveError();
+            game.getTexts().printMoveError();
         }
     }
 

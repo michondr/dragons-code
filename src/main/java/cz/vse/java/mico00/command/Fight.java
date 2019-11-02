@@ -41,12 +41,11 @@ public class Fight implements ICommand {
             handleCreatureHp(player, creature);
 
             if (player.getHp() <= 0) {
-                GameTexts.printDead(player);
-                GameTexts.printGoodbye();
-                System.exit(0);
+                game.getTexts().printDead(player);
+                game.end();
             }
             if (creature.getHp() <= 0) {
-                GameTexts.printDead(creature);
+                game.getTexts().printDead(creature);
 
                 if (itemOnLocation.getClass() == Creature.class) {
                     game.getCurrentPlan().getCreatures().remove(creature);
@@ -64,11 +63,11 @@ public class Fight implements ICommand {
                 }
             }
 
-            GameTexts.printHP(player);
-            GameTexts.printHP(creature);
+            game.getTexts().printHP(player);
+            game.getTexts().printHP(creature);
         }
 
-        checkGameEnd(game.getPlayer());
+        checkGameEnd(game);
     }
 
     public void handleCreatureHp(Creature player, Creature creature) {
@@ -83,11 +82,13 @@ public class Fight implements ICommand {
         }
     }
 
-    private void checkGameEnd(Creature player) {
+    private void checkGameEnd(Game game) {
+        Creature player = game.getPlayer();
+
         for (Loot loot : player.getLootSet()) {
             if (loot.getName().equals("dragon soul") && loot.getDescription().equals("from Alduin")) {
-                GameTexts.printEpilogue(player);
-                GameTexts.printGoodbye();
+                game.getTexts().printEpilogue(player);
+                game.getTexts().printGoodbye();
                 System.exit(0);
             }
         }

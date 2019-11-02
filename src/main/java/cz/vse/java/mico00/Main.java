@@ -1,8 +1,15 @@
 package cz.vse.java.mico00;
 
 import cz.vse.java.mico00.command.ICommand;
+import cz.vse.java.mico00.controller.MainController;
 import cz.vse.java.mico00.game.Game;
 import cz.vse.java.mico00.game.GameTexts;
+import cz.vse.java.mico00.output.ConsoleOutput;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import org.reflections.Reflections;
 
 import java.util.HashSet;
@@ -11,36 +18,41 @@ import java.util.Set;
 /**
  * @author Ondřej Michálek me@michondr.cz || mico00@vse.cz
  */
-public class Main {
+public class Main extends Application {
 
     public static void main(String[] args) {
-        GameTexts.printWelcome();
+        if (args.length == 0) {
+            launch(args);
+        } else if (args[0].equals("-text")) {
 
-        Game dragons_code = new Game();
-//        dragons_code.setFocusable(true);
-//        dragons_code.setVisible(true);
-//        dragons_code.setSize(100, 0);
-
-        dragons_code.setCommands(getCommands());
-        dragons_code.init();
+            Game dragons_code = new Game(new ConsoleOutput());
+            dragons_code.init();
+        } else {
+            System.out.println("Textová verze se spustí argumentem -text");
+        }
     }
 
-    /**
-     * dope way to get around creating another class like `commandSet` which is useless
-     */
-    private static Set<ICommand> getCommands() {
-        Reflections reflections = new Reflections("command");
-        Set<Class<? extends ICommand>> commands = reflections.getSubTypesOf(ICommand.class);
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/hlavni.fxml"));
 
-        Set<ICommand> ics = new HashSet<>();
+        GridPane root = loader.load();
 
-        for (Class<? extends ICommand> ic : commands) {
-            try {
-                ics.add(ic.getDeclaredConstructor().newInstance());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return ics;
+        primaryStage.setTitle("Dragons Code");
+
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("https://fonts.googleapis.com/css?family=Inconsolata:700");
+
+        primaryStage.setScene(scene);
+
+        MainController controller = loader.getController();
+
+        Game dragons_code = new Game(controller.getOutput());
+        dragons_code.init();
+
+        controller.init(dragons_code);
+
+        primaryStage.show();
     }
 }

@@ -44,9 +44,10 @@ public class Go implements ICommand {
 
             game.getPlayer().setLocation(wayHome.getLocation());
             game.setCurrentPlan(item.getLocationPlan());
-            GameTexts.printTextInBlue(item.getWelcoming());
+
+            game.getTexts().printTextInBlue(item.getWelcoming());
         } else {
-            GameTexts.printCollectErrorNoItem();
+            game.getTexts().printCollectErrorNoItem();
         }
     }
 

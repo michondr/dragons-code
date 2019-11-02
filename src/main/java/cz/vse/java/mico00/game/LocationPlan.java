@@ -126,18 +126,6 @@ public class LocationPlan {
                 .orElse(null);
     }
 
-    public void printPlan(Game game, boolean wipeScreen) {
-        if(wipeScreen){
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
-        }
-        GameTexts.printPlan(this, game);
-    }
-
-    public void printPlan(Game game) {
-        printPlan(game, true);
-    }
-
     public String getName() {
         return name;
     }

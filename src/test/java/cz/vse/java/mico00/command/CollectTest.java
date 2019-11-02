@@ -6,6 +6,7 @@ import cz.vse.java.mico00.game.LocationPlan;
 import cz.vse.java.mico00.item.Creature;
 import cz.vse.java.mico00.item.Item;
 import cz.vse.java.mico00.item.Loot;
+import cz.vse.java.mico00.output.ConsoleOutput;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +21,7 @@ public class CollectTest {
 
     @Before
     public void setUp() {
-        game = new Game();
+        game = new Game(new ConsoleOutput());
         LocationPlan locationPlan = new LocationPlan("test plan", 1, 1);
 
         player = new Creature("player");

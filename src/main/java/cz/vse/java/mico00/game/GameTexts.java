@@ -5,6 +5,7 @@ import cz.vse.java.mico00.item.Creature;
 import cz.vse.java.mico00.item.Dragon;
 import cz.vse.java.mico00.item.Item;
 import cz.vse.java.mico00.item.Loot;
+import cz.vse.java.mico00.output.IOutput;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -25,27 +26,33 @@ public class GameTexts {
     public static final String CYAN = "\u001B[36m";
     public static final String WHITE = "\u001B[37m";
 
-    public static void printWelcome() {
+    private IOutput output;
+
+    public GameTexts(IOutput output) {
+        this.output = output;
+    }
+
+    public void printWelcome() {
         System.out.println(RESET + "Hello and welcome to dragons&code!");
     }
 
-    public static void printGoodbye() {
+    public void printGoodbye() {
         System.out.println(RESET + "Thank you for playing this game!");
     }
 
-    public static void printMoveError() {
+    public void printMoveError() {
         System.out.println(RESET + "You cant go any further in this direction");
     }
 
-    public static void printCollectErrorNoItem() {
+    public void printCollectErrorNoItem() {
         System.out.println(RESET + "No loot item here");
     }
 
-    public static void printCollectErrorNotPortable() {
+    public void printCollectErrorNotPortable() {
         System.out.println(RESET + "This item is too heavy to lift");
     }
 
-    public static void printWanderText() {
+    public void printWanderText() {
         String[] wordlist = {
                 "What do you need, handsome?",
                 "Can't wait to count out your coin.",
@@ -107,7 +114,7 @@ public class GameTexts {
         }
     }
 
-    public static void printHelpText() {
+    public void printHelpText() {
         System.out.println(
                 RESET + "This screen is your help screen. You can invoke it any time by pressing \"h\"." +
                         "\nPoint of this game is to have some fun and kill some monsters and dragons in the meantime. " +
@@ -115,7 +122,7 @@ public class GameTexts {
                         "\nLevel up and kill the beast!");
     }
 
-    public static void printHP(Creature creature) {
+    public void printHP(Creature creature) {
         String text;
 
         if (creature.isPlayer()) {
@@ -132,7 +139,7 @@ public class GameTexts {
         System.out.println(RESET);
     }
 
-    public static void printHit(Creature creature) {
+    public void printHit(Creature creature) {
         if (creature.isPlayer()) {
             System.out.print(PURPLE + "Your hit: " + creature.getHit());
         } else {
@@ -141,7 +148,7 @@ public class GameTexts {
         System.out.println(RESET);
     }
 
-    public static void printDead(Creature creature) {
+    public void printDead(Creature creature) {
         if (creature.isPlayer()) {
             System.out.println("You died :( \n want to play one more?");
         } else {
@@ -149,7 +156,7 @@ public class GameTexts {
         }
     }
 
-    public static void printCreatureColoredSymbol(Creature creature, Creature player) {
+    public void printCreatureColoredSymbol(Creature creature, Creature player) {
         if (creature.getHp() / player.getHit() > player.getHp() / creature.getHit()) {
             System.out.print(RED + creature.getSymbol());
         } else {
@@ -159,7 +166,7 @@ public class GameTexts {
         System.out.print(RESET);
     }
 
-    public static void printTextInBlue(String text) {
+    public void printTextInBlue(String text) {
         System.out.print(BLUE + text);
         System.out.println(RESET);
     }
@@ -189,78 +196,15 @@ public class GameTexts {
         }
     }
 
-    public static void printEpilogue(Creature player) {
+    public void printEpilogue(Creature player) {
         System.out.println("You've finished the game!");
     }
 
-    public static void printPlan(LocationPlan plan, Game game) {
-        Location endpoint = plan.getPlanSizeEndpoint();
-        Creature player = game.getPlayer();
-
-        GameTexts.printTextInBlue(plan.getName());
-        printEndRow(endpoint.getX());
-
-        for (int y = 0; y < endpoint.getY(); y++) {
-            System.out.print("|");
-            for (int x = 0; x < endpoint.getX(); x++) {
-                Location curLoc = new Location(x, y);
-
-                if (player.getLocation().equals(curLoc)) {
-                    System.out.print(GameTexts.YELLOW + player.getSymbol());
-                    System.out.print(GameTexts.RESET);
-                    continue;
-                }
-
-                Item curItem = plan.getItemByLocation(curLoc);
-
-                if (curItem == null) {
-                    System.out.print(" ");
-                } else if (curItem.getClass() == Creature.class || curItem.getClass() == Dragon.class) {
-                    GameTexts.printCreatureColoredSymbol((Creature) curItem, game.getPlayer());
-                } else {
-                    System.out.print(curItem.getSymbol());
-                }
-
-            }
-            System.out.print("|");
-            System.out.println();
-        }
-
-        printEndRow(endpoint.getX());
-    }
-
-    private static void clearConsole() {
-        try
-        {
-            final String os = System.getProperty("os.name");
-
-            if (os.contains("Windows"))
-            {
-                Runtime.getRuntime().exec("cls");
-            }
-            else
-            {
-                Runtime.getRuntime().exec("clear");
-            }
-        }
-        catch (final Exception e)
-        {
-            System.err.println(e.getMessage());
-        }
-    }
-
-    private static void printEndRow(int size) {
-        for (int x = 0; x < size + 2; x++) {
-            System.out.print("-");
-        }
-        System.out.println(GameTexts.RESET);
-    }
-
-    private static void printSeparator() {
+    private void printSeparator() {
         System.out.println(GameTexts.RESET + "_______________________________________________________________");
     }
 
-    public static void printInventory(Creature creature) {
+    public void printInventory(Creature creature) {
         printSeparator();
 
         final Object[][] table = new String[creature.getLootSet().size()+1][4];
@@ -284,9 +228,9 @@ public class GameTexts {
         }
     }
 
-    public static void printHelp(Game game) {
+    public void printHelp(Game game) {
         printSeparator();
-        GameTexts.printHelpText();
+        this.printHelpText();
         System.out.println("key\tdescription");
 
         for (ICommand command : game.getCommands()) {

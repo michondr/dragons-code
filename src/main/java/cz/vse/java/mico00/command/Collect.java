@@ -32,14 +32,14 @@ public class Collect implements ICommand {
             Loot item = (Loot) itemOnLocation;
 
             if(!item.isPortable()){
-                GameTexts.printCollectErrorNotPortable();
+                game.getTexts().printCollectErrorNotPortable();
                 return;
             }
 
             game.getPlayer().addLoot(item);
             game.getCurrentPlan().getLoot().remove(item);
         } else {
-            GameTexts.printCollectErrorNoItem();
+            game.getTexts().printCollectErrorNoItem();
         }
     }
 

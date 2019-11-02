@@ -24,9 +24,9 @@ public class Down implements ICommand {
 
         if (canMove(game)) {
             game.getPlayer().editLocation(0, 1);
-            game.getCurrentPlan().printPlan(game);
+            game.getOutput().outputPlan(game);
         } else {
-            GameTexts.printMoveError();
+            game.getTexts().printMoveError();
         }
     }
 

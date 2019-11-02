@@ -9,9 +9,9 @@ import cz.vse.java.mico00.game.GameTexts;
 public class Help implements ICommand {
 
     public static void print(Game game) {
-        GameTexts.printHelp(game);
-        GameTexts.printHP(game.getPlayer());
-        GameTexts.printHit(game.getPlayer());
+        game.getTexts().printHelp(game);
+        game.getTexts().printHP(game.getPlayer());
+        game.getTexts().printHit(game.getPlayer());
 
     }
 
