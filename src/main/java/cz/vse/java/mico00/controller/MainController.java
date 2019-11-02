@@ -4,10 +4,7 @@ import cz.vse.java.mico00.game.Game;
 import cz.vse.java.mico00.game.KeyPressHandler;
 import cz.vse.java.mico00.output.ControllerOutput;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
@@ -16,7 +13,6 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -53,42 +49,23 @@ public class MainController extends GridPane {
     }
 
     public void newGame(ActionEvent actionEvent) {
+        warArea.setText("");
+        outputArea.setText("");
+
+        this.game.init();
+        warArea.requestFocus();
     }
 
-    public void showHelp(ActionEvent actionEvent) throws IOException {
-//        Stage stage = new Stage();
-//
-//        stage.setTitle("HTML");
-//        stage.setWidth(500);
-//        stage.setHeight(500);
-//        Scene scene = new Scene(new Group());
-//
-//        VBox root = new VBox();
-//
-//        final WebView browser = new WebView();
-//        final WebEngine webEngine = browser.getEngine();
-//
-//        ScrollPane scrollPane = new ScrollPane();
-//        scrollPane.setContent(browser);
-//        webEngine.loadContent(getClass().getResource("/help.html").getContent().toString());
-//
-//        root.getChildren().addAll(scrollPane);
-//        scene.setRoot(root);
-//
-//        stage.setScene(scene);
-//        stage.show();
+    public void showHelp(ActionEvent actionEvent) {
         try {
-//            File file = new File("C:/test/a.html");
             URL url = getClass().getResource("/help.html").toURI().toURL();
-//             file:/C:/test/a.html
-            System.out.println("Local URL: " + url.toString());
             this.webEngine.load(url.toString());
         } catch (MalformedURLException | URISyntaxException e) {
             e.printStackTrace();
         }
 
         Stage stage = new Stage();
-         VBox root = new VBox();
+        VBox root = new VBox();
         root.setSpacing(5);
         root.getChildren().addAll(browser);
 
@@ -96,8 +73,8 @@ public class MainController extends GridPane {
 
         stage.setTitle("JavaFX WebView (o7planning.org)");
         stage.setScene(scene);
-        stage.setWidth(450);
-        stage.setHeight(300);
+        stage.setWidth(800);
+        stage.setHeight(400);
 
         stage.show();
     }
