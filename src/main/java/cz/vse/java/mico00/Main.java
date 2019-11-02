@@ -42,7 +42,7 @@ public class Main extends Application {
         primaryStage.setTitle("Dragons Code");
 
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("https://fonts.googleapis.com/css?family=Inconsolata:700");
+        scene.getStylesheets().add("https://fonts.googleapis.com/css?family=Major+Mono+Display");
 
         primaryStage.setScene(scene);
 

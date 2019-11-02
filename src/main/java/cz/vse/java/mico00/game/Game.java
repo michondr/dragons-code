@@ -22,7 +22,7 @@ public class Game {
     private IOutput output;
 
     public Game(IOutput output) {
-        commands = ICommandCollector.getCommands();
+        this.commands = ICommandCollector.getCommands();
 
         this.gameItemsCreator = new GameItemsCreator();
 

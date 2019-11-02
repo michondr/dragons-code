@@ -32,4 +32,9 @@ public class Door extends Item implements IPrintable {
     public void setWelcoming(String welcoming) {
         this.welcoming = welcoming;
     }
+
+    @Override
+    public String getHint() {
+        return "press 'g' to go through";
+    }
 }

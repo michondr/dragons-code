@@ -24,8 +24,6 @@ public class ControllerOutput implements IOutput {
     @Override
     public void output(String str) {
         outputArea.appendText(str);
-        outputArea.appendText("\n");
-        outputArea.appendText("\n");
     }
 
     @Override
@@ -56,10 +54,7 @@ public class ControllerOutput implements IOutput {
                 Location curLoc = new Location(x, y);
 
                 if (player.getLocation().equals(curLoc)) {
-                    Text t = new Text(String.valueOf(player.getSymbol()));
-                    t.setFill(Color.YELLOW);
-
-                    planText.append(t.getText());
+                    planText.append(player.getSymbol());
 
                     continue;
                 }

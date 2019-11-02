@@ -9,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author Ondřej Michálek me@michondr.cz || mico00@vse.cz
- *
+ * <p>
  * method overloading if cool and stuff, but I'm missing default arguments from php.
  * overloading creates soo much more code
  */
@@ -47,7 +47,7 @@ public class Creature extends Item implements IPrintable {
         this.player = false;
     }
 
-    public Creature(String name, String desription, boolean friendly, boolean moving, int hp, int hit, Loot ... loot) {
+    public Creature(String name, String desription, boolean friendly, boolean moving, int hp, int hit, Loot... loot) {
         super(name);
         setDescription(desription);
         this.friendly = friendly;
@@ -158,8 +158,10 @@ public class Creature extends Item implements IPrintable {
         String parent = "(" + super.getClass().getSimpleName() + ") " + getName();
 
         if (!getDescription().equals("")) {
-            parent += " \"" + getDescription() + "\"\n";
+            parent += " \"" + getDescription() + "\"";
         }
+
+        parent += " (" + getHint() + ") \n";
 
         StringJoiner loot = new StringJoiner(", ");
 
@@ -167,5 +169,10 @@ public class Creature extends Item implements IPrintable {
             loot.add(l.getName());
         }
         return parent + "loot: " + loot + "\n";
+    }
+
+    @Override
+    public String getHint() {
+        return "press 'f' to fight";
     }
 }

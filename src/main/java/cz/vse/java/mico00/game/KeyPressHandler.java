@@ -27,7 +27,7 @@ public class KeyPressHandler {
         ICommand command = game.getCommand(key);
 
         if (command == null) {
-            output.output("Not valid command key, try again");
+            output.output("Not valid command key, try again\n");
         } else {
             if (command.isMove()) {
                 handleMovingCreatures();

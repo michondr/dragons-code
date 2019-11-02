@@ -42,16 +42,24 @@ public class Item implements IPrintable {
 
     @Override
     public String toString() {
-        String delimitered = "";
+        String suffix = "";
 
         if (!description.equals("")) {
-            delimitered = " - " + description;
+            suffix = " - " + description;
         }
-        return "(" + super.getClass().getSimpleName() + ") " + name + delimitered + "\n";
+
+        suffix += " ("+getHint()+") ";
+
+        return "(" + super.getClass().getSimpleName() + ") " + name + suffix + "\n";
     }
 
     @Override
     public char getSymbol() {
         return ' ';
+    }
+
+    @Override
+    public String getHint() {
+        return "";
     }
 }

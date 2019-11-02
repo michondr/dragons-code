@@ -50,4 +50,9 @@ public class Loot extends Item implements IPrintable {
     public char getSymbol() {
         return '$';
     }
+
+    @Override
+    public String getHint() {
+        return "press 'c' to collect";
+    }
 }

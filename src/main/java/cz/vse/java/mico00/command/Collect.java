@@ -38,6 +38,8 @@ public class Collect implements ICommand {
 
             game.getPlayer().addLoot(item);
             game.getCurrentPlan().getLoot().remove(item);
+
+            game.getTexts().printLootCollected(item, game.getPlayer());
         } else {
             game.getTexts().printCollectErrorNoItem();
         }

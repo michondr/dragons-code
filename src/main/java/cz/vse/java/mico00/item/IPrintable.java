@@ -6,4 +6,6 @@ package cz.vse.java.mico00.item;
 public interface IPrintable {
 
     char getSymbol();
+
+    String getHint();
 }

@@ -10,7 +10,7 @@ public class ICommandCollector {
      * dope way to get around creating another class like `commandSet` which is useless
      */
     public static Set<ICommand> getCommands() {
-        Reflections reflections = new Reflections("command");
+        Reflections reflections = new Reflections("cz.vse.java.mico00.command");
         Set<Class<? extends ICommand>> commands = reflections.getSubTypesOf(ICommand.class);
 
         Set<ICommand> ics = new HashSet<>();
