@@ -8,7 +8,7 @@ artifacting:
 
     artifacts:
         paths:
-            - target/adventura-cviceni-1.0.0-SNAPSHOT.jar
+            - target/adventura-cviceni-1.0.0.jar
 
 dev_test:
     script:
@@ -18,4 +18,4 @@ dev_test:
 
     artifacts:
         paths:
-            - target/adventura-cviceni-1.0.0-SNAPSHOT.jar
+            - target/adventura-cviceni-1.0.0.jar
