@@ -22,7 +22,7 @@ public class CollectTest {
     @Before
     public void setUp() {
         game = new Game(new ConsoleOutput());
-        LocationPlan locationPlan = new LocationPlan("test plan", 1, 1);
+        LocationPlan locationPlan = new LocationPlan("test plan", 3, 3);
 
         player = new Creature("player");
         player.setPlayer(true);
