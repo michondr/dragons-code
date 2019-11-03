@@ -297,7 +297,7 @@ public class GameItemsCreator {
         GameItemsFactory.createDoor(whiterun, riften, new Location(whiterun.getPlanSizeEndpoint().getX() - 1, whiterun.getPlanSizeEndpoint().getY() - 5), "city of the thieves");
 
         currentLocationPlan = helgen;
-        baseLocationPlan = whiterun;
+        baseLocationPlan = helgen;
     }
 
     public LocationPlan getBaseLocationPlan() {

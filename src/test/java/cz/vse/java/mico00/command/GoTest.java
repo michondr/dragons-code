@@ -48,6 +48,6 @@ public class  GoTest {
         Go goCommand = new Go();
         goCommand.init(this.game);
 
-        Assert.assertEquals("test plan", game.getCurrentPlan().getName());
+        Assert.assertEquals("current plan", game.getCurrentPlan().getName());
     }
 }
