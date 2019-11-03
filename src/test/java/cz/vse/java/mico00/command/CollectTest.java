@@ -26,10 +26,10 @@ public class CollectTest {
 
         player = new Creature("player");
         player.setPlayer(true);
-        player.setLocation(new Location(0, 0));
+        player.setLocation(new Location(2, 2));
 
         Item item = new Loot("test item");
-        item.setLocation(new Location(0, 0));
+        item.setLocation(new Location(2, 2));
 
         game.setPlayer(player);
         game.setCurrentPlan(locationPlan);
