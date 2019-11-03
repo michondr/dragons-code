@@ -244,7 +244,14 @@ public class GameTexts {
         }
 
         for (final Object[] row : table) {
-            System.out.format("%-10s%-10s%-40s%-15s\n", row);
+            if(output instanceof ConsoleOutput){
+                System.out.format("%-10s%-10s%-40s%-15s\n", row);
+            } else {
+                output.output("\n");
+                for (Object o: row){
+                    output.output((String) o+"\t\t");
+                }
+            }
         }
     }
 
