@@ -1,6 +1,5 @@
 package cz.vse.java.mico00.game;
 
-import cz.vse.java.mico00.Main;
 import cz.vse.java.mico00.command.Help;
 import cz.vse.java.mico00.command.ICommand;
 import cz.vse.java.mico00.command.ICommandCollector;
@@ -8,7 +7,6 @@ import cz.vse.java.mico00.item.*;
 import cz.vse.java.mico00.output.IOutput;
 
 import java.util.Set;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @author Ondřej Michálek me@michondr.cz || mico00@vse.cz

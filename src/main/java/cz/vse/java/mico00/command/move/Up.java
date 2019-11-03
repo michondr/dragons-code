@@ -24,7 +24,7 @@ public class Up implements ICommand {
 
         if (canMove(game)) {
             game.getPlayer().editLocation(0, -1);
-            game.getOutput().outputPlan(game);
+
         } else {
             game.getTexts().printMoveError();
         }
@@ -38,10 +38,6 @@ public class Up implements ICommand {
     private boolean canMove(Game game) {
         int playerY = game.getPlayer().getLocation().getY();
 
-        if (playerY == 0) {
-            return false;
-        }
-
-        return true;
+        return playerY != 0;
     }
 }

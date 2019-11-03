@@ -63,10 +63,6 @@ public class ControllerOutput implements IOutput {
 
                 if (curItem == null) {
                     planText.append(" ");
-                } else if (curItem.getClass() == Creature.class || curItem.getClass() == Dragon.class) {
-                    // todo printCreatureColoredSymbol
-//                    game.getTexts().printCreatureColoredSymbol((Creature) curItem, game.getPlayer());
-                    planText.append(curItem.getSymbol());
                 } else {
                     planText.append(curItem.getSymbol());
                 }
@@ -82,14 +78,6 @@ public class ControllerOutput implements IOutput {
     }
 
     private String printEndRow(int size) {
-        StringBuilder row = new StringBuilder();
-
-        for (int x = 0; x < size + 2; x++) {
-            row.append("-");
-        }
-
-        row.append("\n");
-
-        return row.toString();
+        return "-".repeat(Math.max(0, size + 2)) + "\n";
     }
 }

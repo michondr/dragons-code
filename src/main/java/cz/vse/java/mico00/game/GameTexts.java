@@ -2,8 +2,6 @@ package cz.vse.java.mico00.game;
 
 import cz.vse.java.mico00.command.ICommand;
 import cz.vse.java.mico00.item.Creature;
-import cz.vse.java.mico00.item.Dragon;
-import cz.vse.java.mico00.item.Item;
 import cz.vse.java.mico00.item.Loot;
 import cz.vse.java.mico00.output.ConsoleOutput;
 import cz.vse.java.mico00.output.ControllerOutput;
@@ -211,16 +209,6 @@ public class GameTexts {
         } else {
             output.output("You crushed " + creature.getName() + "\n");
         }
-    }
-
-    public void printCreatureColoredSymbol(Creature creature, Creature player) {
-        if (creature.getHp() / player.getHit() > player.getHp() / creature.getHit()) {
-            output.output(RED + creature.getSymbol());
-        } else {
-            output.output(String.valueOf(creature.getSymbol()));
-        }
-
-        output.output(RESET);
     }
 
     public void printTextInBlue(String text) {

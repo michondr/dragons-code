@@ -1,5 +1,6 @@
 package cz.vse.java.mico00.controller;
 
+import cz.vse.java.mico00.command.ICommand;
 import cz.vse.java.mico00.game.Game;
 import cz.vse.java.mico00.game.KeyPressHandler;
 import cz.vse.java.mico00.output.ControllerOutput;
@@ -13,7 +14,6 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -41,7 +41,26 @@ public class MainController extends GridPane {
     }
 
     public void handleKeyTyped(KeyEvent keyEvent) {
-        keyPressHandler.handleKeyTyped(keyEvent.getCharacter().charAt(0));
+        char key = keyEvent.getCharacter().charAt(0);
+
+        ICommand command = game.getCommand(key);
+
+        if (command == null) {
+            game.getOutput().output("Not valid command key, try again\n");
+        } else {
+            if (command.isMove()) {
+                this.keyPressHandler.handleMovingCreatures();
+                this.keyPressHandler.handleMovingDragons();
+            }
+            command.init(game);
+            this.keyPressHandler.handleCurrentLocationInfo();
+
+            if (command.isMove()) {
+                game.getTexts().printWanderText();
+            }
+        }
+
+        game.getOutput().outputPlan(game);
     }
 
     public ControllerOutput getOutput() {

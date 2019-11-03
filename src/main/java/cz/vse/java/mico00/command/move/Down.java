@@ -24,7 +24,7 @@ public class Down implements ICommand {
 
         if (canMove(game)) {
             game.getPlayer().editLocation(0, 1);
-            game.getOutput().outputPlan(game);
+
         } else {
             game.getTexts().printMoveError();
         }
@@ -39,10 +39,6 @@ public class Down implements ICommand {
         int playerY = game.getPlayer().getLocation().getY();
         int gameY = game.getCurrentPlan().getPlanSizeEndpoint().getY();
 
-        if (playerY == gameY-1) {
-            return false;
-        }
-
-        return true;
+        return playerY != gameY - 1;
     }
 }

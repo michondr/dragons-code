@@ -58,7 +58,15 @@ public class ConsoleOutput implements IOutput {
                 if (curItem == null) {
                     System.out.print(" ");
                 } else if (curItem.getClass() == Creature.class || curItem.getClass() == Dragon.class) {
-                    game.getTexts().printCreatureColoredSymbol((Creature) curItem, game.getPlayer());
+                    Creature creature = (Creature) curItem;
+
+                    if (creature.getHp() / player.getHit() > player.getHp() / creature.getHit()) {
+                        System.out.print(GameTexts.RED + creature.getSymbol());
+                        System.out.print(GameTexts.RESET);
+                    } else {
+                        System.out.print(creature.getSymbol());
+                    }
+
                 } else {
                     System.out.print(curItem.getSymbol());
                 }

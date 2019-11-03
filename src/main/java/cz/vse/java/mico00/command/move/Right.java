@@ -24,7 +24,7 @@ public class Right implements ICommand {
 
         if (canMove(game)) {
             game.getPlayer().editLocation(1, 0);
-            game.getOutput().outputPlan(game);
+
         } else {
             game.getTexts().printMoveError();
         }
@@ -39,10 +39,6 @@ public class Right implements ICommand {
         int playerX = game.getPlayer().getLocation().getX();
         int gameX = game.getCurrentPlan().getPlanSizeEndpoint().getX();
 
-        if (playerX == gameX-1) {
-            return false;
-        }
-
-        return true;
+        return playerX != gameX - 1;
     }
 }

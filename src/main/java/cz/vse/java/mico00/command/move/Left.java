@@ -24,7 +24,7 @@ public class Left implements ICommand {
 
         if (canMove(game)) {
             game.getPlayer().editLocation(-1, 0);
-            game.getOutput().outputPlan(game);
+
         } else {
             game.getTexts().printMoveError();
         }
@@ -38,10 +38,6 @@ public class Left implements ICommand {
     private boolean canMove(Game game) {
         int playerX = game.getPlayer().getLocation().getX();
 
-        if (playerX == 0) {
-            return false;
-        }
-
-        return true;
+        return playerX != 0;
     }
 }

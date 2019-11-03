@@ -1,54 +1,28 @@
 package cz.vse.java.mico00.game;
 
-import cz.vse.java.mico00.command.ICommand;
+import cz.vse.java.mico00.game.Game;
 import cz.vse.java.mico00.item.Creature;
 import cz.vse.java.mico00.item.Dragon;
 import cz.vse.java.mico00.item.Item;
 import cz.vse.java.mico00.output.IOutput;
-import javafx.scene.input.KeyEvent;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 public class KeyPressHandler {
 
-    private GameTexts gameTexts;
     private Game game;
     private IOutput output;
 
     public KeyPressHandler(Game game) {
         this.game = game;
         this.output = game.getOutput();
-        this.gameTexts = new GameTexts(output);
     }
 
-    public void handleKeyTyped(char key) {
-
-        System.out.print(key);
-        ICommand command = game.getCommand(key);
-
-        if (command == null) {
-            output.output("Not valid command key, try again\n");
-        } else {
-            if (command.isMove()) {
-                handleMovingCreatures();
-                handleMovingDragons();
-            }
-            command.init(game);
-            handleCurrentLocationInfo();
-
-            if (command.isMove()) {
-                gameTexts.printWanderText();
-            }
-        }
-
-        output.outputPlan(game);
-    }
-
-    private void handleCurrentLocationInfo() {
+    public void handleCurrentLocationInfo() {
         Item itemOnLocation = game.getCurrentPlan().getItemByLocation(game.getPlayer().getLocation());
 
         if (itemOnLocation != null) {
-           output.output(itemOnLocation.toString());
+            output.output(itemOnLocation.toString());
         }
     }
 
@@ -56,7 +30,7 @@ public class KeyPressHandler {
      * move movable creature to randomly to random position or not
      * and look after walking yout of the frame
      */
-    private void handleMovingCreatures() {
+    public void handleMovingCreatures() {
         for (Creature cr : game.getCurrentPlan().getCreatures()) {
             if (!cr.isMoving()) {
                 continue;
@@ -103,7 +77,7 @@ public class KeyPressHandler {
     /**
      * same as handleMovingCreatures, but more drastic
      */
-    private void handleMovingDragons() {
+    public void handleMovingDragons() {
         for (Dragon dr : game.getCurrentPlan().getDragons()) {
             if (!dr.isMoving()) {
                 continue;
