@@ -34,7 +34,7 @@ public class FightTest {
 
     @Test
     public void fightLoose() {
-        Creature creature = new Creature("test creature", "", false, false, 100, 200);
+        Creature creature = new Creature("test creature", "", false, false, 1000, 400);
 
         Fight fightCommand = new Fight();
         fightCommand.handleCreatureHp(player, creature);
