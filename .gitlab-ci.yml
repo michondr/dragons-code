@@ -9,13 +9,10 @@ artifacting:
     artifacts:
         paths:
             - target/adventura-cviceni-1.0.0.jar
+            - target/adventura-cviceni-1.0.0-jar-with-dependencies.jar
 
 dev_test:
     script:
         - "mvn test"
     only:
         - dev
-
-    artifacts:
-        paths:
-            - target/adventura-cviceni-1.0.0.jar
