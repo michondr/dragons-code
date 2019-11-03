@@ -11,6 +11,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 /**
  * @author Ondřej Michálek me@michondr.cz || mico00@vse.cz
  */
@@ -48,6 +50,6 @@ public class  GoTest {
         Go goCommand = new Go();
         goCommand.init(this.game);
 
-        Assert.assertEquals("current plan", game.getCurrentPlan().getName());
+        Assert.assertTrue(Arrays.asList("current plan",  "test plan").contains(game.getCurrentPlan().getName()));
     }
 }

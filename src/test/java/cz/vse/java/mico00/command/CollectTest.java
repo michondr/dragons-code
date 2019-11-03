@@ -1,11 +1,13 @@
 package cz.vse.java.mico00.command;
 
+import cz.vse.java.mico00.command.move.Right;
 import cz.vse.java.mico00.game.Game;
 import cz.vse.java.mico00.game.Location;
 import cz.vse.java.mico00.game.LocationPlan;
 import cz.vse.java.mico00.item.Creature;
 import cz.vse.java.mico00.item.Item;
 import cz.vse.java.mico00.item.Loot;
+import cz.vse.java.mico00.output.BlackHoleOutput;
 import cz.vse.java.mico00.output.ConsoleOutput;
 import org.junit.Assert;
 import org.junit.Before;
@@ -21,20 +23,19 @@ public class CollectTest {
 
     @Before
     public void setUp() {
-        game = new Game(new ConsoleOutput());
-        LocationPlan locationPlan = new LocationPlan("test plan", 3, 3);
+        game = new Game(new BlackHoleOutput());
+        LocationPlan locationPlan = new LocationPlan("test plan", 1, 1);
 
         player = new Creature("player");
         player.setPlayer(true);
-        player.setLocation(new Location(2, 2));
+        player.setLocation(new Location(0, 0));
 
         Item item = new Loot("test item");
-        item.setLocation(new Location(2, 2));
+        item.setLocation(new Location(0, 0));
 
         game.setPlayer(player);
         game.setCurrentPlan(locationPlan);
 
-        locationPlan.addItem(player);
         locationPlan.addItem(item);
     }
 
